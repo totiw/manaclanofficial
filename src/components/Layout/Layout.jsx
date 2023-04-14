@@ -4,11 +4,13 @@ import { Link as ScrollLink } from "react-scroll";
 import Brand from "../../assets/Identity/mana-brand.webp";
 import Menu from "../../assets/Utils/icons/bars-solid.svg";
 import Xmark from "../../assets/Utils/icons/xmark-solid.svg";
+import ArrowUp from "../../assets/Utils/icons/chevron-up-solid.svg";
 import Footer from "./Footer";
 
 const Layout = () => {
   const routeLocation = useLocation();
-  const [offset, setOffset] = useState(-100);
+  const [goUp, setGoUp] = useState(false);
+  const [offset, setOffset] = useState(-80);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -19,6 +21,11 @@ const Layout = () => {
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
+      if (document.documentElement.scrollTop > 500) {
+        setGoUp(true);
+      } else {
+        setGoUp(false);
+      }
       if (document.documentElement.scrollTop > 200) {
         setIsSticky(true);
       } else {
@@ -26,7 +33,7 @@ const Layout = () => {
       }
     });
     if (windowWidth > 576) {
-      setOffset(-100);
+      setOffset(-90);
     } else if (windowWidth < 576) {
       setOffset(-80);
     }
@@ -42,6 +49,14 @@ const Layout = () => {
   }, [windowWidth]);
   return (
     <>
+      <span
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className={`bg-[#EA0A8C] fixed z-50 w-10 lg:w-12 h-10 lg:h-12 bottom-4 right-4 p-2 rounded drop-shadow-xl cursor-pointer duration-300 ease-out transition-all ${
+          goUp ? "opacity-100 scale-100" : "opacity-0 scale-0"
+        }`}
+      >
+        <img src={ArrowUp} alt="go to top page mana" />
+      </span>
       {/* Mobile Nav */}
       <div
         className={`z-50 h-full w-full bg-[#4F9AA8] fixed top-0 right-0 flex flex-col justify-evenly items-center nav-link text-white duration-500 ease-in-out transition-all ${
@@ -53,7 +68,7 @@ const Layout = () => {
         </button>
         <ScrollLink
           to="about"
-          smooth={true}
+          smooth="true"
           duration={500}
           offset={offset}
           className="select-none tracking-[2px]"
@@ -63,7 +78,7 @@ const Layout = () => {
         </ScrollLink>
         <ScrollLink
           to="vision"
-          smooth={true}
+          smooth="true"
           duration={500}
           offset={offset}
           className="select-none tracking-[2px]"
@@ -73,7 +88,7 @@ const Layout = () => {
         </ScrollLink>
         <ScrollLink
           to="mission"
-          smooth={true}
+          smooth="true"
           duration={500}
           offset={offset}
           className="select-none tracking-[2px]"
@@ -83,7 +98,7 @@ const Layout = () => {
         </ScrollLink>
         <Link
           to="/monster-list"
-          smooth={true}
+          smooth="true"
           duration={500}
           offset={offset}
           className="select-none tracking-[2px]"
@@ -93,7 +108,7 @@ const Layout = () => {
         </Link>
         <ScrollLink
           to="contact"
-          smooth={true}
+          smooth="true"
           duration={500}
           offset={offset}
           className="select-none tracking-[2px]"
@@ -117,7 +132,7 @@ const Layout = () => {
       <nav
         className={`${
           isSticky ? "-translate-y-0" : "-translate-y-full"
-        } bg-[#4F9AA8] fixed z-40 top-0 lg:hidden h-[80px] flex flex-row justify-between items-center px-[20px] text-white duration-500 ease-in-out transition-all`}
+        } bg-[#4F9AA8] fixed z-40 top-0 lg:hidden h-[80px] flex flex-row justify-between items-center px-[20px] text-white duration-500 ease-in-out transition-all shadow-lg`}
       >
         <div className="flex flex-row grow">
           <Link to="/">
@@ -135,10 +150,10 @@ const Layout = () => {
         className={`hidden lg:z-50 lg:w-full h-[122px] top-0 lg:flex flex-row justify-between items-center px-[100px] text-white`}
       >
         {routeLocation.pathname == "/" && (
-          <div className="flex flex-row gap-[58px] nav-link">
+          <div className="relative z-10 flex flex-row gap-[58px] nav-link">
             <ScrollLink
               to="about"
-              smooth={true}
+              smooth="true"
               duration={500}
               offset={offset}
               className="select-none tracking-[1.5px] cursor-pointer"
@@ -147,7 +162,7 @@ const Layout = () => {
             </ScrollLink>
             <ScrollLink
               to="vision"
-              smooth={true}
+              smooth="true"
               duration={500}
               offset={offset}
               className="select-none tracking-[1.5px] cursor-pointer"
@@ -156,7 +171,7 @@ const Layout = () => {
             </ScrollLink>
             <ScrollLink
               to="mission"
-              smooth={true}
+              smooth="true"
               duration={500}
               offset={offset}
               className="select-none tracking-[1.5px] cursor-pointer"
@@ -168,18 +183,28 @@ const Layout = () => {
             </Link>
           </div>
         )}
-        <div className={`flex flex-row grow ${routeLocation.pathname == "/" ? "justify-center" : ""}`}>
-          <Link to="/">
-            <img src={Brand} alt="mana-brand" width="168" />
-          </Link>
+        <div
+          className={`${routeLocation.pathname == "/" ? "absolute z-0 w-full left-0" : ""} left-0 flex flex-row grow ${
+            routeLocation.pathname == "/" ? "justify-center" : ""
+          }`}
+        >
+          {routeLocation.pathname == "/" ? (
+            <ScrollLink to="hero" smooth="true" duration={500} offset={offset - 20} className="cursor-pointer">
+              <img src={Brand} alt="mana-brand" width="138" />
+            </ScrollLink>
+          ) : (
+            <Link to="/">
+              <img src={Brand} alt="mana-brand" width="138" />
+            </Link>
+          )}
         </div>
-        <div className="flex flex-row grow justify-end">
+        <div className="flex flex-row grow justify-end nav-link">
           <ScrollLink
             to="contact"
-            smooth={true}
+            smooth="true"
             duration={500}
             offset={offset}
-            className="bg-[#EA0A8C] flex flex-row items-center justify-center px-7 py-1 text-[20px] font-extrabold rounded-lg cursor-pointer"
+            className="relative z-10 bg-[#EA0A8C] flex flex-row items-center justify-center px-7 py-1 rounded-lg cursor-pointer"
           >
             Contact
           </ScrollLink>
@@ -188,13 +213,13 @@ const Layout = () => {
       <nav
         className={`bg-[#4F9AA8] hidden fixed ${
           isSticky ? "-translate-y-0" : "-translate-y-full"
-        } lg:z-50 lg:w-full h-[122px] top-0 lg:flex flex-row justify-between items-center px-[100px] text-white duration-500 ease-in-out transition-all`}
+        } lg:z-50 lg:w-full h-[90px] top-0 lg:flex flex-row justify-between items-center px-[100px] text-white duration-500 ease-in-out transition-all shadow-lg`}
       >
         {routeLocation.pathname == "/" && (
-          <div className="flex flex-row gap-[58px] nav-link">
+          <div className="relative z-10 flex flex-row gap-[58px] nav-link">
             <ScrollLink
               to="about"
-              smooth={true}
+              smooth="true"
               duration={500}
               offset={offset}
               className="select-none tracking-[1.5px] cursor-pointer"
@@ -203,7 +228,7 @@ const Layout = () => {
             </ScrollLink>
             <ScrollLink
               to="vision"
-              smooth={true}
+              smooth="true"
               duration={500}
               offset={offset}
               className="select-none tracking-[1.5px] cursor-pointer"
@@ -212,7 +237,7 @@ const Layout = () => {
             </ScrollLink>
             <ScrollLink
               to="mission"
-              smooth={true}
+              smooth="true"
               duration={500}
               offset={offset}
               className="select-none tracking-[1.5px] cursor-pointer"
@@ -224,18 +249,28 @@ const Layout = () => {
             </Link>
           </div>
         )}
-        <div className={`flex flex-row grow ${routeLocation.pathname == "/" ? "justify-center" : ""}`}>
-          <Link to="/">
-            <img src={Brand} alt="mana-brand" width="168" />
-          </Link>
+        <div
+          className={`${routeLocation.pathname == "/" ? "absolute z-0 w-full left-0" : ""} flex flex-row grow ${
+            routeLocation.pathname == "/" ? "justify-center" : ""
+          }`}
+        >
+          {routeLocation.pathname == "/" ? (
+            <ScrollLink to="hero" smooth="true" duration={500} offset={offset - 20} className="cursor-pointer">
+              <img src={Brand} alt="mana-brand" width="138" />
+            </ScrollLink>
+          ) : (
+            <Link to="/">
+              <img src={Brand} alt="mana-brand" width="138" />
+            </Link>
+          )}
         </div>
-        <div className="flex flex-row grow justify-end">
+        <div className="flex flex-row grow justify-end nav-link">
           <ScrollLink
             to="contact"
-            smooth={true}
+            smooth="true"
             duration={500}
             offset={offset}
-            className="bg-[#EA0A8C] flex flex-row items-center justify-center px-7 py-1 text-[20px] font-extrabold rounded-lg cursor-pointer"
+            className="relative z-10 bg-[#EA0A8C] flex flex-row items-center justify-center px-7 py-1 rounded-lg cursor-pointer"
           >
             Contact
           </ScrollLink>

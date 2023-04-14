@@ -11,5 +11,5 @@ body {
 }
 
 .nav-link {
-  @apply text-2xl font-extrabold
+  @apply text-lg font-bold
 }
