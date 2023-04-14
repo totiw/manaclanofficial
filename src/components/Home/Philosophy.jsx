@@ -1,5 +1,6 @@
 import BG from "../../assets/Utils/futuristic-bg.webp";
 import Neon from "../../assets/Utils/black-neon.webp";
+import { Link as ScrollLink } from "react-scroll";
 const Philosophy = () => {
   return (
     <div className="w-full h-48 lg:h-[683px] relative flex flex-row items-center justify-center px-4 lg:px-[100px] text-center text-white mt-10 mb-20">
@@ -14,9 +15,15 @@ const Philosophy = () => {
         <blockquote className="z-30 font-bold text-xl lg:text-5xl select-none lg:tracking-[3px]">
           “TO FACE EVERY OBSTACLE BOTH FROM INSIDE AND OUT AS ONE FAMILY WHICH IS MANA”
         </blockquote>
-        <button className="z-30 w-24 lg:w-[200px] text-xs lg:text-2xl font-bold py-2 lg:py-3 bg-[#4F9AA8] rounded-tr-lg rounded-bl-lg">
+        <ScrollLink
+          to="about"
+          smooth={true}
+          duration={500}
+          offset={-80}
+          className="z-30 w-24 lg:w-[200px] text-xs lg:text-2xl font-bold py-2 lg:py-3 bg-[#4F9AA8] rounded-tr-lg rounded-bl-lg"
+        >
           FIND MORE
-        </button>
+        </ScrollLink>
       </div>
     </div>
   );
