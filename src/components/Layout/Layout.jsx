@@ -5,6 +5,7 @@ import Brand from "../../assets/Identity/mana-brand.webp";
 import Menu from "../../assets/Utils/icons/bars-solid.svg";
 import Xmark from "../../assets/Utils/icons/xmark-solid.svg";
 import ArrowUp from "../../assets/Utils/icons/chevron-up-solid.svg";
+import Contact from "./Contact";
 import Footer from "./Footer";
 
 const Layout = () => {
@@ -277,6 +278,7 @@ const Layout = () => {
         </div>
       </nav>
       <Outlet />
+      <Contact />
       <Footer />
     </>
   );

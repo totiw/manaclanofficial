@@ -4,7 +4,6 @@ const Philosophy = lazy(() => import("../../components/Home/Philosophy"));
 const About = lazy(() => import("../../components/Home/About"));
 const Vision = lazy(() => import("../../components/Home/Vision"));
 const Mission = lazy(() => import("../../components/Home/Mission"));
-const Contact = lazy(() => import("../../components/Layout/Contact"));
 const index = () => {
   return (
     <main className="w-full">
@@ -15,7 +14,6 @@ const index = () => {
         <About />
         <Vision />
         <Mission />
-        <Contact />
       </Suspense>
     </main>
   );
