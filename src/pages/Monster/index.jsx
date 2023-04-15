@@ -18,16 +18,17 @@ const Monster = () => {
       console.error(err.message);
     }
   };
+
   useEffect(() => {
     getMonster();
   }, []);
   return (
-    <div id="monster-list" className="w-full lg:min-h-[87vh] flex flex-col items-center lg:py-6 lg:gap-7">
-      <Tabel monsters={currentMonsters} />
+    <div id="monster-list" className="w-full lg:min-h-[87vh] flex flex-col items-center lg:py-6 gap-8 lg:gap-10">
+      <Tabel monsters={monsters} currentMonsters={currentMonsters} />
       <Pagination
         totalMonster={monsters.length}
-        monsterPerPage={monsterPerPage}
         currentPage={currentPage}
+        monsterPerPage={monsterPerPage}
         setCurrentPage={setCurrentPage}
       />
     </div>
