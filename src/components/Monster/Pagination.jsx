@@ -40,7 +40,9 @@ const Pagination = ({ query, monsterPerPage, totalMonster, setCurrentPage, curre
           <button
             key={index}
             onClick={() => setCurrentPage(page)}
-            className={`${page == currentPage ? "bg-[#4F9AA8]" : ""} text-white border rounded-md py-1 px-2`}
+            className={`${
+              page == currentPage ? "bg-gradient-to-br from-[#6BCBDD] to-[#EA0A8C]" : ""
+            } text-white border rounded-md py-1 px-2`}
           >
             {page}
           </button>

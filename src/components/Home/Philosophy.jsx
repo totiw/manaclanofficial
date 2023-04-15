@@ -20,7 +20,7 @@ const Philosophy = () => {
           smooth={true}
           duration={500}
           offset={-80}
-          className="z-30 w-24 lg:w-[170px] text-xs lg:text-lg font-bold py-2 lg:py-3 bg-[#4F9AA8] rounded-tr-lg rounded-bl-lg cursor-pointer"
+          className="z-30 w-24 lg:w-[170px] text-xs lg:text-lg font-bold py-2 lg:py-3 bg-[#4F9AA8] rounded-tr-lg rounded-bl-lg hover:scale-90 duration-300 ease-out transition-all cursor-pointer"
         >
           FIND MORE
         </ScrollLink>

@@ -4,7 +4,8 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import SearchIcon from "../../assets/Utils/icons/magnifying-glass-solid.svg";
 import ChevronIcon from "../../assets/Utils/icons/chevron-down-solid.svg";
 import Details from "./Details";
-const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
+const Tabel = ({ query, setQuery, monsters, currentMonsters, sort, setSort }) => {
+  const [isSortOpen, setIsSortOpen] = useState(false);
   const [isDetailOpened, setIsDetailOpened] = useState(false);
   const [selectedData, setSelectedData] = useState({});
   const [breakPoint, setBreakPoint] = useState("desktop");
@@ -38,6 +39,11 @@ const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
     setIsDetailOpened(true);
   };
 
+  const sortBy = (type) => {
+    setSort(type);
+    setIsSortOpen(false);
+  };
+
   useEffect(() => {
     if (windowWidth > 576) {
       setBreakPoint("desktop");
@@ -50,7 +56,7 @@ const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
   return (
     <>
       <Details isOpen={isDetailOpened} setIsOpen={setIsDetailOpened} data={selectedData} />
-      <div className="w-[90%] lg:w-[70%] lg:min-h-[100%] flex flex-col gap-5">
+      <div className="relative z-20 w-[90%] lg:w-[70%] lg:min-h-[100%] flex flex-col gap-5">
         <div className="flex flex-row justify-between">
           <div className="relative flex flex-row items-center">
             <img
@@ -68,12 +74,40 @@ const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
               className="w-48 lg:w-96 h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg pl-10 pr-4 font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
             />
           </div>
-          <button className="bg-[#4F9AA8] flex flex-row items-center gap-1 lg:gap-2 text-white font-bold text-sm lg:text-base px-3 lg:px-4 rounded-lg lg:tracking-[1px]">
-            Sort by <img src={ChevronIcon} alt="chevron down" className="w-3 lg:w-4" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setIsSortOpen((prev) => !prev)}
+              className="bg-[#4F9AA8] h-full flex flex-row items-center gap-1 lg:gap-2 text-white font-bold text-sm lg:text-base px-3 lg:px-4 rounded-lg lg:tracking-[1px]"
+            >
+              {sort == "" ? "Sort by" : sort.toUpperCase()}{" "}
+              <img
+                src={ChevronIcon}
+                alt="chevron down"
+                className={`${isSortOpen ? "rotate-180" : "rotate-0"} w-3 lg:w-4 duration-500 ease-out transition-all`}
+              />
+            </button>
+            <div
+              className={`${
+                isSortOpen ? "h-40 opacity-100" : "h-0 opacity-0"
+              } bg-[#EA0A8C] absolute w-full top-full right-0 flex flex-col rounded-lg font-semibold text-white duration-500 ease-in-out transition-all`}
+            >
+              <button onClick={() => sortBy("lvl")} className="py-2 hover:bg-[#EA0A8C] brightness-110 rounded-t-lg">
+                LVL
+              </button>
+              <button onClick={() => sortBy("type")} className="py-2 hover:bg-[#EA0A8C] brightness-110">
+                Type
+              </button>
+              <button onClick={() => sortBy("hp")} className="py-2 hover:bg-[#EA0A8C] brightness-110">
+                HP
+              </button>
+              <button onClick={() => sortBy("atk")} className="py-2 hover:bg-[#EA0A8C] brightness-110 rounded-b-lg">
+                ATK
+              </button>
+            </div>
+          </div>
         </div>
         <div className="flex flex-col">
-          <div className="bg-gradient-to-r h-16 from-[#6BCBDD] to-[#63469B] flex flex-row items-center text-center text-white text-sm lg:text-base font-bold tracking-[1px]">
+          <div className="bg-gradient-to-r h-16 from-[#6BCBDD] to-[#63469B] background-animate flex flex-row items-center text-center text-white text-sm lg:text-base font-bold tracking-[1px] rounded-t-lg">
             <h2 className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/6"}`}>LVL</h2>
             <h2 className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>Monster</h2>
             <h2 className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>Name</h2>
@@ -90,7 +124,9 @@ const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
             currentMonsters.map((monster, index) => (
               <div
                 key={index}
-                className="bg-white flex flex-row items-center text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3"
+                className={`${
+                  index == currentMonsters.length - 1 ? "rounded-b-lg" : ""
+                } bg-white flex flex-row items-center text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3`}
               >
                 <p className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/6"}`}>{monster.lvl}</p>
                 <div
@@ -124,13 +160,17 @@ const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
                 </div>
               </div>
             ))}
-          {query != "" &&
+          {(query != "" || sort != "") &&
             monsters
               .filter((monster) => monster.name.toLowerCase().includes(query))
               .map((monster, index) => (
                 <div
                   key={index}
-                  className="bg-white flex flex-row items-center text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3"
+                  className={`${
+                    index == monsters.filter((monster) => monster.name.toLowerCase().includes(query)).length - 1
+                      ? "rounded-b-lg"
+                      : ""
+                  } bg-white flex flex-row items-center text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3`}
                 >
                   <p className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/6"}`}>{monster.lvl}</p>
                   <div
