@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-const Pagination = ({ monsterPerPage, totalMonster, setCurrentPage, currentPage }) => {
+const Pagination = ({ query, monsterPerPage, totalMonster, setCurrentPage, currentPage }) => {
   const totalPage = Math.ceil(totalMonster / monsterPerPage);
   const [first, setFirst] = useState(0);
   const [last, setLast] = useState(5);
@@ -22,7 +22,7 @@ const Pagination = ({ monsterPerPage, totalMonster, setCurrentPage, currentPage 
       pages.push(index);
     }
     setDisplay(pages.slice(first, last));
-  }, []);
+  }, [totalPage, first, last]);
 
   return (
     <div
@@ -33,6 +33,7 @@ const Pagination = ({ monsterPerPage, totalMonster, setCurrentPage, currentPage 
         &laquo;
       </button>
       {display &&
+        query == "" &&
         display.map((page, index) => (
           <button
             key={index}
