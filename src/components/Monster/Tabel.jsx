@@ -5,12 +5,37 @@ import SearchIcon from "../../assets/Utils/icons/magnifying-glass-solid.svg";
 import ChevronIcon from "../../assets/Utils/icons/chevron-down-solid.svg";
 import Details from "./Details";
 const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
-  const [isDetailOpened, setIsDetailOpened] = useState();
+  const [isDetailOpened, setIsDetailOpened] = useState(false);
+  const [selectedData, setSelectedData] = useState({});
   const [breakPoint, setBreakPoint] = useState("desktop");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const detectWidth = () => {
     setWindowWidth(window.innerWidth);
+  };
+
+  const getDetails = (id) => {
+    monsters.map((monster) => {
+      if (id == monster.id) {
+        setSelectedData({
+          ...selectedData,
+          lvl: monster.lvl,
+          name: monster.name,
+          image: monster.image,
+          size: monster.size,
+          type: monster.type,
+          element: monster.element,
+          hp: monster.hp,
+          atk: monster.atk,
+          def: monster.def,
+          matk: monster.matk,
+          mdef: monster.mdef,
+          hit: monster.hit,
+          flee: monster.flee,
+        });
+      }
+    });
+    setIsDetailOpened(true);
   };
 
   useEffect(() => {
@@ -24,7 +49,7 @@ const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
   });
   return (
     <>
-      {/* <Details /> */}
+      <Details isOpen={isDetailOpened} setIsOpen={setIsDetailOpened} data={selectedData} />
       <div className="w-[90%] lg:w-[70%] lg:min-h-[100%] flex flex-col gap-5">
         <div className="flex flex-row justify-between">
           <div className="relative flex flex-row items-center">
@@ -90,7 +115,10 @@ const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
                   </>
                 )}
                 <div className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>
-                  <button className={`bg-[#6BCBDD] px-3 lg:px-5 py-2 rounded-md lg:rounded-lg text-white`}>
+                  <button
+                    onClick={() => getDetails(monster.id)}
+                    className={`bg-gradient-to-r from-[#6BCBDD] to-[#6BCBDD] px-3 lg:px-5 py-2 rounded-md lg:rounded-lg text-white hover:from-[#4F9AA8] hover:to-[#EA0B8D] transition-all duration-500 ease-out`}
+                  >
                     Details
                   </button>
                 </div>
@@ -127,7 +155,10 @@ const Tabel = ({ query, setQuery, monsters, currentMonsters }) => {
                     </>
                   )}
                   <div className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>
-                    <button className={`bg-[#6BCBDD] px-3 lg:px-5 py-2 rounded-md lg:rounded-lg text-white`}>
+                    <button
+                      onClick={() => getDetails(monster.id)}
+                      className={`bg-gradient-to-r from-[#6BCBDD] to-[#6BCBDD] px-3 lg:px-5 py-2 rounded-md lg:rounded-lg text-white hover:from-[#4F9AA8] hover:to-[#EA0B8D] transition-all duration-500 ease-out`}
+                    >
                       Details
                     </button>
                   </div>

@@ -4,7 +4,6 @@ const Pagination = ({ query, monsterPerPage, totalMonster, setCurrentPage, curre
   const [first, setFirst] = useState(0);
   const [last, setLast] = useState(5);
   const [display, setDisplay] = useState([]);
-  const [isInitialRender, setIsInitialRender] = useState(true);
 
   const next = () => {
     setFirst((prev) => prev + 5);
@@ -29,7 +28,7 @@ const Pagination = ({ query, monsterPerPage, totalMonster, setCurrentPage, curre
       className="max-w-[90%] lg:max-w-[500px] flex flex-row flex-wrap
      justify-center gap-3 mb-5 lg:mb-40"
     >
-      {first != 0 && (
+      {first != 0 && query == "" && (
         <button onClick={() => prev()} className={`text-white border rounded-md py-1 px-2`}>
           &laquo;
         </button>
@@ -46,7 +45,7 @@ const Pagination = ({ query, monsterPerPage, totalMonster, setCurrentPage, curre
             {page}
           </button>
         ))}
-      {last <= totalPage && (
+      {last <= totalPage && query == "" && (
         <button onClick={() => next()} className={`text-white border rounded-md py-1 px-2`}>
           &raquo;
         </button>
