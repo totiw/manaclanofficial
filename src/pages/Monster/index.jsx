@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import axios from "../../components/api/axios";
-import Tabel from "../../components/Monster/Tabel";
-import Pagination from "../../components/Monster/Pagination";
+const Tabel = lazy(() => import("../../components/Monster/Tabel"));
+const Pagination = lazy(() => import("../../components/Monster/Pagination"));
 const Monster = () => {
   const [query, setQuery] = useState("");
   const [monsters, setMonsters] = useState([]);
@@ -27,14 +27,18 @@ const Monster = () => {
   }, []);
   return (
     <div id="monster-list" className="w-full lg:min-h-[87vh] flex flex-col items-center lg:py-6 gap-8 lg:gap-10">
-      <Tabel query={query} setQuery={setQuery} monsters={monsters} currentMonsters={currentMonsters} />
-      <Pagination
-        query={query}
-        totalMonster={monsters.length}
-        currentPage={currentPage}
-        monsterPerPage={monsterPerPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <Suspense fallback={<p>Loading..</p>}>
+        <Tabel query={query} setQuery={setQuery} monsters={monsters} currentMonsters={currentMonsters} />
+      </Suspense>
+      <Suspense fallback={<p>Loading..</p>}>
+        <Pagination
+          query={query}
+          totalMonster={monsters.length}
+          currentPage={currentPage}
+          monsterPerPage={monsterPerPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </Suspense>
     </div>
   );
 };
