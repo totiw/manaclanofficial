@@ -4,7 +4,7 @@ const Philosophy = lazy(() => import("../../components/Home/Philosophy"));
 const About = lazy(() => import("../../components/Home/About"));
 const Vision = lazy(() => import("../../components/Home/Vision"));
 const Mission = lazy(() => import("../../components/Home/Mission"));
-const index = () => {
+const Home = () => {
   return (
     <main className="w-full">
       <h1 className="hidden">MANA CLAN</h1>
@@ -19,4 +19,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Home;
