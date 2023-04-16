@@ -34,9 +34,9 @@ const Monster = () => {
         className="relative z-10 w-full lg:min-h-[87vh] flex flex-col items-center lg:py-6 gap-8 lg:gap-10"
       >
         <Suspense fallback={<p>Loading..</p>}>
-          <Tabel monsters={monsters} currentMonsters={currentMonsters} setIsDataChanging={setIsDataChanging} />
+          <Tabel monsters={monsters} setIsDataChanging={setIsDataChanging} />
         </Suspense>
-        <Suspense fallback={<p>Loading..</p>}>
+        {/* <Suspense fallback={<p>Loading..</p>}>
           <Pagination
             totalMonster={monsters.length}
             currentPage={currentPage}
@@ -44,7 +44,7 @@ const Monster = () => {
             setCurrentPage={setCurrentPage}
             isDataChanging={isDataChanging}
           />
-        </Suspense>
+        </Suspense> */}
       </div>
     </>
   );
