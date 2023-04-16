@@ -119,8 +119,8 @@ const Tabel = ({ monsters, currentMonsters, setIsDataChanging }) => {
             </button>
             <div
               className={`${
-                isSortOpen ? "h-40 opacity-100" : "h-0 opacity-0"
-              } bg-[#EA0A8C] absolute w-full top-full right-0 flex flex-col rounded-lg font-semibold text-white duration-500 ease-in-out transition-all`}
+                isSortOpen ? "z-20 h-40 opacity-100 translate-y-0" : "z-0 h-0 opacity-100"
+              } bg-[#EA0A8C] absolute w-full top-full right-0 flex flex-col rounded-lg translate-y-5 font-semibold text-white duration-500 ease-in-out transition-all`}
             >
               <button
                 onClick={() => handleSortChange("lvl")}
@@ -143,7 +143,7 @@ const Tabel = ({ monsters, currentMonsters, setIsDataChanging }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col relative z-10">
           <div className="bg-gradient-to-r h-16 from-[#6BCBDD] to-[#63469B] background-animate flex flex-row items-center text-center text-white text-sm lg:text-base font-bold tracking-[1px] rounded-t-lg">
             <h2 className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/6"}`}>LVL</h2>
             <h2 className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>Monster</h2>
