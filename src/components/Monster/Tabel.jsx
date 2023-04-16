@@ -78,7 +78,7 @@ const Tabel = ({ monsters, setIsDataChanging }) => {
         <h2 className="mt-5 flex flex-row justify-center lg:justify-start gap-3 tracking-[1px] text-2xl lg:text-4xl font-bold text-white select-none">
           DATA <span className="text-[#6BCBDD]">MONSTER</span>
         </h2>
-        <span className="w-[20%] lg:w-[40%] h-1 lg:h-3 bg-[#EA0A8C] flex flex-row mt-5"></span>
+        <span className="w-[20%] lg:w-[15%] h-1 lg:h-2 bg-[#EA0A8C] flex flex-row mt-5"></span>
         <p className="text-white mt-3">Total {sortedData == null ? monsters.length : sortedData.length} Items</p>
       </div>
       <div className="relative overflow-auto z-20 w-full lg:w-[80%] lg:min-h-[100%] flex flex-col gap-5">
