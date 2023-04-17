@@ -3,28 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ArrowIcon from "../../assets/Utils/icons/arrow-right-solid.svg";
-const Table = ({ equips }) => {
+
+const Table = ({ awakens }) => {
   const navigate = useNavigate();
   const [sortedData, setSortedData] = useState(null);
 
   // SORTED WITH INPUT
-  const handleFilterNum = (event) => {
-    const name = event.target.name;
-    const filtered = equips.filter(
-      (obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value)
-    );
-    if (event.target.value == "") {
-      setSortedData(null);
-      // setIsDataChanging(false);
-    } else {
-      setSortedData(filtered);
-      // setIsDataChanging(true);
-    }
-  };
-
   const handleFilterString = (event) => {
     const name = event.target.name;
-    const filtered = equips.filter(
+    const filtered = awakens.filter(
       (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
     );
     if (event.target.value.toLowerCase() == "") {
@@ -45,10 +32,10 @@ const Table = ({ equips }) => {
           <img src={ArrowIcon} alt="arrow icon" />
         </span>
         <h2 className="mt-5 flex flex-row justify-center lg:justify-start gap-3 tracking-[1px] text-2xl lg:text-4xl font-bold text-white select-none">
-          DATA <span className="text-[#6BCBDD]">EQUIP</span>
+          DATA <span className="text-[#6BCBDD]">AWAKEN</span>
         </h2>
         <span className="w-[20%] lg:w-[15%] h-1 lg:h-2 bg-[#EA0A8C] flex flex-row mt-5"></span>
-        <p className="text-white mt-3">Total {sortedData == null ? equips.length : sortedData.length} Items</p>
+        <p className="text-white mt-3">Total {sortedData == null ? awakens.length : sortedData.length} Items</p>
       </div>
       <div className="relative overflow-auto z-20 w-full lg:w-[80%] lg:min-h-[100%] flex flex-col gap-5">
         <div className="flex flex-col relative z-10">
@@ -67,70 +54,89 @@ const Table = ({ equips }) => {
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
-            {/* LEVEL */}
-            <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
-              <span>LEVEL</span>
-              <input
-                type="number"
-                name="lvl"
-                id="lvl"
-                onChange={handleFilterNum}
-                className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
-              />
-            </h2>
-            {/* POWER */}
-            <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
-              <span>POWER</span>
-              <input
-                type="number"
-                name="power"
-                id="power"
-                onChange={handleFilterNum}
-                className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
-              />
-            </h2>
-            {/* TYPE */}
-            <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
-              <span>TYPE</span>
-              <input
-                type="text"
-                name="type"
-                id="type"
-                onChange={handleFilterString}
-                className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
-              />
-            </h2>
-            {/* JOB */}
-            <h2 className={`basis-3/12 flex flex-col items-center gap-3`}>
-              <span>JOB</span>
-              <input
-                type="text"
-                name="job"
-                id="job"
-                onChange={handleFilterString}
-                className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
-              />
-            </h2>
             {/* SLOT */}
             <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
               <span>SLOT</span>
-              <input
-                type="number"
+              <select
                 name="slot"
                 id="slot"
+                value=""
+                onChange={handleFilterString}
+                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
+              >
+                <option value=""></option>
+                <option value="Muffler" className="capitalize">
+                  Muffler
+                </option>
+                <option value="Armor" className="capitalize">
+                  Armor
+                </option>
+                <option value="Face" className="capitalize">
+                  Face
+                </option>
+                <option value="Mouth" className="capitalize">
+                  Mouth
+                </option>
+                <option value="Secondary" className="capitalize">
+                  Secondary
+                </option>
+                <option value="Headgear" className="capitalize">
+                  Headgear
+                </option>
+                <option value="Accessory" className="capitalize">
+                  Accessory
+                </option>
+                <option value="Back" className="capitalize">
+                  Back
+                </option>
+                <option value="Shoes" className="capitalize">
+                  Shoes
+                </option>
+                <option value="Weapon" className="capitalize">
+                  Weapon
+                </option>
+              </select>
+            </h2>
+            {/* BEFORE AWAKENING */}
+            <h2 className={`basis-3/12 flex flex-col items-center gap-3`}>
+              <span>BEFORE AWAKENING</span>
+              <input
+                type="text"
+                name="before"
+                id="before"
                 onChange={handleFilterString}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
-            {/* CRAFT */}
-            <h2 className={`basis-2/12`}>CRAFT</h2>
+            {/* UPGRADE LV.1 ~ LV.15 */}
+            <h2 className={`basis-2/12 flex flex-col items-center gap-3`}>
+              <span>UPGRADE LV.1 ~ LV.15</span>
+              <input
+                type="text"
+                name="upgrade"
+                id="upgrade"
+                onChange={handleFilterString}
+                className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+              />
+            </h2>
+            {/* AWAKENING ★/★★/★★★ */}
+            <h2 className={`basis-3/12 flex flex-col items-center gap-3`}>
+              <span>AWAKENING ★/★★/★★★</span>
+              <input
+                type="text"
+                name="awakening"
+                id="awakening"
+                onChange={handleFilterString}
+                className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+              />
+            </h2>
           </div>
           {sortedData == null
-            ? equips.map((equip, index) => (
+            ? awakens.map((awaken, index) => (
                 <div
                   key={index}
                   className={`w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                    equips.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
+                    awakens.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
                   }`}
                 >
                   <p className={`basis-1/12`}>{index + 1}</p>
@@ -138,35 +144,20 @@ const Table = ({ equips }) => {
                     <span className="w-[60%]">
                       <LazyLoadImage
                         effect="blur"
-                        src={equip.image}
-                        alt={equip.name}
+                        src={awaken.image}
+                        alt={awaken.name}
                         placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
                       />
                     </span>
                   </div>
-                  <p className={`basis-1/12`}>{equip.name}</p>
-                  <p className="basis-1/12">{equip.lvl}</p>
-                  <p className="basis-1/12">{equip.power}</p>
-                  <p className="basis-1/12">{equip.type}</p>
-                  <p className="basis-3/12">{equip.job}</p>
-                  <p className="basis-1/12">{equip.slot}</p>
-                  <div className={`basis-2/12 flex flex-row justify-center`}>
-                    {equip.craft ? (
-                      <span className="w-[60%]">
-                        <LazyLoadImage
-                          effect="blur"
-                          src={equip.craft}
-                          alt={equip.name}
-                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                        />
-                      </span>
-                    ) : (
-                      <p>No Image Displayed</p>
-                    )}
-                  </div>
+                  <p className={`basis-1/12`}>{awaken.name}</p>
+                  <p className="basis-1/12">{awaken.slot}</p>
+                  <p className="basis-3/12">{awaken.before}</p>
+                  <p className="basis-2/12">{awaken.upgrade}</p>
+                  <p className="basis-3/12">{awaken.awakening}</p>
                 </div>
               ))
-            : sortedData.map((equip, index) => (
+            : sortedData.map((awaken, index) => (
                 <div
                   key={index}
                   className={`w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
@@ -178,32 +169,17 @@ const Table = ({ equips }) => {
                     <span className="w-[60%]">
                       <LazyLoadImage
                         effect="blur"
-                        src={equip.image}
-                        alt={equip.name}
+                        src={awaken.image}
+                        alt={awaken.name}
                         placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
                       />
                     </span>
                   </div>
-                  <p className={`basis-1/12`}>{equip.name}</p>
-                  <p className="basis-1/12">{equip.lvl}</p>
-                  <p className="basis-1/12">{equip.power}</p>
-                  <p className="basis-1/12">{equip.type}</p>
-                  <p className="basis-3/12">{equip.job}</p>
-                  <p className="basis-1/12">{equip.slot}</p>
-                  <div className={`basis-2/12 flex flex-row justify-center`}>
-                    {equip.craft ? (
-                      <span className="w-[60%]">
-                        <LazyLoadImage
-                          effect="blur"
-                          src={equip.craft}
-                          alt={equip.name}
-                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                        />
-                      </span>
-                    ) : (
-                      <p>No Image Displayed</p>
-                    )}
-                  </div>
+                  <p className={`basis-1/12`}>{awaken.name}</p>
+                  <p className="basis-1/12">{awaken.slot}</p>
+                  <p className="basis-3/12">{awaken.before}</p>
+                  <p className="basis-2/12">{awaken.upgrade}</p>
+                  <p className="basis-3/12">{awaken.awakening}</p>
                 </div>
               ))}
         </div>
