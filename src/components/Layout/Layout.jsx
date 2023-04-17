@@ -10,6 +10,7 @@ import Footer from "./Footer";
 
 const Layout = () => {
   const routeLocation = useLocation();
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const [navData, setNavData] = useState(false);
   const [goUp, setGoUp] = useState(false);
   const [offset, setOffset] = useState(-80);
@@ -26,6 +27,7 @@ const Layout = () => {
       if (document.documentElement.scrollTop > 500) {
         setGoUp(true);
       } else {
+        setIsNavOpen(false);
         setGoUp(false);
       }
       if (document.documentElement.scrollTop > 200) {
@@ -76,134 +78,145 @@ const Layout = () => {
         </button>
         {routeLocation.pathname == "/" ? (
           <>
-            <ScrollLink
-              to="about"
-              smooth="true"
-              duration={500}
-              offset={offset}
-              className="relative z-10 select-none tracking-[2px] text-xl"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </ScrollLink>
-            <ScrollLink
-              to="vision"
-              smooth="true"
-              duration={500}
-              offset={offset}
-              className="relative z-10 select-none tracking-[2px] text-xl"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Vision
-            </ScrollLink>
-            <ScrollLink
-              to="mission"
-              smooth="true"
-              duration={500}
-              offset={offset}
-              className="relative z-10 select-none tracking-[2px] text-xl"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Mission
-            </ScrollLink>
             <div
               className={`${
-                navData ? "basis-1/4" : "basis-0"
+                isNavOpen ? "basis-1/4" : "basis-0"
               } relative w-[50%] flex flex-col justify-between duration-700 ease-linear transition-all`}
             >
-              <button onClick={() => setNavData((prev) => !prev)} className="relative z-10 text-xl">
-                Data
-              </button>
+              <button onClick={() => setIsNavOpen((prev) => !prev)}>Community</button>
               <div
                 className={`${
-                  navData ? "opacity-100 gap-3" : "gap-0"
-                } absolute z-0 w-full top-12 opacity-0 flex flex-col items-center delay-200 duration-300 ease-linear transition-all text-center text-base font-normal`}
+                  isNavOpen ? "opacity-100 gap-5" : "opacity-0 gap-0"
+                } absolute z-0 w-full top-12 flex flex-col items-center delay-200 duration-300 ease-linear transition-all text-center text-base font-normal`}
               >
-                <span onClick={() => setNavData(false)} className="w-full">
-                  <Link
-                    to="/monster-list"
+                <span className="w-full">
+                  <ScrollLink
+                    to="about"
+                    duration={500}
+                    offset={-80}
                     className={`${
-                      navData && "translate-y-0"
+                      isNavOpen && "translate-y-0"
                     } duration-100 ease-in-out transition-all translate-y-6 select-none tracking-[2px]`}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsNavOpen(false);
+                    }}
                   >
-                    Monster
-                  </Link>
+                    About
+                  </ScrollLink>
                 </span>
-                <span onClick={() => setNavData(false)} className="w-full">
-                  <Link
-                    to="/equip-list"
+
+                <span className="w-full">
+                  <ScrollLink
+                    to="vision"
                     className={`${
-                      navData && "translate-y-0"
+                      isNavOpen && "translate-y-0"
                     } duration-200 ease-in-out transition-all translate-y-6 select-none tracking-[2px]`}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsNavOpen(false);
+                    }}
                   >
-                    Equip
-                  </Link>
+                    Vision
+                  </ScrollLink>
                 </span>
-                <span onClick={() => setNavData(false)} className="w-full">
-                  <Link
-                    to="/cardawakening"
+                <span className="w-full">
+                  <ScrollLink
+                    to="mission"
                     className={`${
-                      navData && "translate-y-0"
+                      isNavOpen && "translate-y-0"
                     } duration-500 ease-in-out transition-all translate-y-6 select-none tracking-[2px]`}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsNavOpen(false);
+                    }}
                   >
-                    Cardawakening
-                  </Link>
-                </span>
-                <span onClick={() => setNavData(false)} className="w-full">
-                  <Link
-                    to="/cardcollection"
-                    className={`${
-                      navData && "translate-y-0"
-                    } duration-700 ease-in-out transition-all translate-y-6 select-none tracking-[2px]`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Cardcollection
-                  </Link>
+                    Mission
+                  </ScrollLink>
                 </span>
               </div>
             </div>
+            <Link to="/monster-list" onClick={() => setIsMenuOpen(false)}>
+              Monster
+            </Link>
+            <Link to="/equip-list" onClick={() => setIsMenuOpen(false)}>
+              Equip
+            </Link>
+            <Link to="/cardcollection" onClick={() => setIsMenuOpen(false)}>
+              Card
+            </Link>
           </>
-        ) : (
+        ) : routeLocation.pathname == "/monster-list" ||
+          routeLocation.pathname == "/monster-exp" ||
+          routeLocation.pathname == "/monster-drop" ? (
           <>
             <Link
               to="/monster-list"
-              className="relative z-10 select-none tracking-[2px] text-xl"
+              className="relative z-10 select-none tracking-[2px]"
               onClick={() => setIsMenuOpen(false)}
             >
               Monster
             </Link>
             <Link
+              to="/monster-exp"
+              className="relative z-10 select-none tracking-[2px]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Exp
+            </Link>
+            <Link
+              to="/monster-drop"
+              className="relative z-10 select-none tracking-[2px]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Drop
+            </Link>
+          </>
+        ) : routeLocation.pathname == "/equip-list" ? (
+          <>
+            <Link
               to="/equip-list"
-              className="relative z-10 select-none tracking-[2px] text-xl"
+              className="relative z-10 select-none tracking-[2px]"
               onClick={() => setIsMenuOpen(false)}
             >
               Equip
             </Link>
-            <Link
-              to="/cardawakening"
-              className="relative z-10 select-none tracking-[2px] text-xl"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Card Awaken
-            </Link>
+          </>
+        ) : routeLocation.pathname == "/cardcollection" ||
+          routeLocation.pathname == "/cardawakening" ||
+          routeLocation.pathname == "/cardeffects" ? (
+          <>
             <Link
               to="/cardcollection"
-              className="relative z-10 select-none tracking-[2px] text-xl"
+              className="relative z-10 select-none tracking-[2px]"
               onClick={() => setIsMenuOpen(false)}
             >
-              Card Collection
+              Card
+            </Link>
+            <Link
+              to="/cardawakening"
+              className="relative z-10 select-none tracking-[2px]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Awakening
+            </Link>
+            <Link
+              to="/cardeffects"
+              className="relative z-10 select-none tracking-[2px]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Effects
             </Link>
           </>
+        ) : (
+          <p>No Display</p>
         )}
         <ScrollLink
           to="contact"
           smooth="true"
           duration={500}
           offset={offset}
-          className="relative z-10 select-none tracking-[2px] text-xl"
+          className="relative z-10 select-none tracking-[2px]"
           onClick={() => setIsMenuOpen(false)}
         >
           Contact
@@ -238,56 +251,90 @@ const Layout = () => {
         </div>
       </nav>
       {/* Desktop Nav */}
+      <div className={`${isNavOpen ? " lg:flex" : "lg:hidden"} hidden w-full px-[100px] fixed z-50`}>
+        <div className="absolute gap-3 bg-[#4F9AA8] top-20 flex flex-col text-white text-md font-semibold">
+          <ScrollLink
+            to="about"
+            smooth="true"
+            duration={500}
+            offset={offset}
+            className="select-none tracking-[1.5px] cursor-pointer px-3 py-1 hover:bg-[#6BCBDD]"
+          >
+            About
+          </ScrollLink>
+          <ScrollLink
+            to="vision"
+            smooth="true"
+            duration={500}
+            offset={offset}
+            className="select-none tracking-[1.5px] cursor-pointer px-3 py-1 hover:bg-[#6BCBDD]"
+          >
+            Vision
+          </ScrollLink>
+          <ScrollLink
+            to="mission"
+            smooth="true"
+            duration={500}
+            offset={offset}
+            className="select-none tracking-[1.5px] cursor-pointer px-3 py-1 hover:bg-[#6BCBDD]"
+          >
+            Mission
+          </ScrollLink>
+        </div>
+      </div>
       <nav
-        className={`hidden lg:z-50 lg:w-full h-[122px] top-0 lg:flex flex-row justify-between items-center px-[100px] text-white`}
+        className={`hidden lg:z-40 lg:w-full h-[122px] top-0 lg:flex flex-row justify-between items-center px-[100px] text-white`}
       >
         <div className={`gap-[58px] relative z-10 flex flex-row nav-link`}>
           {routeLocation.pathname == "/" ? (
             <>
-              <ScrollLink
-                to="about"
-                smooth="true"
-                duration={500}
-                offset={offset}
-                className="select-none tracking-[1.5px] cursor-pointer"
-              >
-                About
-              </ScrollLink>
-              <ScrollLink
-                to="vision"
-                smooth="true"
-                duration={500}
-                offset={offset}
-                className="select-none tracking-[1.5px] cursor-pointer"
-              >
-                Vision
-              </ScrollLink>
-              <ScrollLink
-                to="mission"
-                smooth="true"
-                duration={500}
-                offset={offset}
-                className="select-none tracking-[1.5px] cursor-pointer"
-              >
-                Mission
-              </ScrollLink>
+              <button onClick={() => setIsNavOpen((prev) => !prev)}>Community</button>
               <Link to="/monster-list" className="select-none tracking-[1.5px] cursor-pointer">
                 Monster
               </Link>
+              <Link to="/equip-list" className="select-none tracking-[1.5px] cursor-pointer">
+                Equip
+              </Link>
+              <Link to="/cardcollection" className="select-none tracking-[1.5px] cursor-pointer">
+                Card
+              </Link>
             </>
-          ) : (
+          ) : routeLocation.pathname == "/monster-list" ||
+            routeLocation.pathname == "/monster-exp" ||
+            routeLocation.pathname == "/monster-drop" ? (
             <>
               <Link to="/monster-list" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
                 Monster
               </Link>
+              <Link to="/monster-exp" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Exp
+              </Link>
+              <Link to="/monster-drop" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Drop
+              </Link>
+            </>
+          ) : routeLocation.pathname == "/equip-list" ? (
+            <>
               <Link to="/equip-list" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
                 Equip
               </Link>
-              <Link to="/cardawakening" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
-                Awaken
-              </Link>
+            </>
+          ) : routeLocation.pathname == "/cardcollection" || routeLocation.pathname == "/cardawakening" ? (
+            <>
               <Link to="/cardcollection" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
-                Collection
+                Card
+              </Link>
+              <Link to="/cardawakening" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Awakening
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/card-collection" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Card
+              </Link>
+              <Link to="/card-awakening" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Awakening
               </Link>
             </>
           )}
@@ -318,55 +365,43 @@ const Layout = () => {
       <nav
         className={`bg-[#4F9AA8] hidden fixed ${
           isSticky ? "-translate-y-0" : "-translate-y-full"
-        } lg:z-50 lg:w-full h-[90px] top-0 lg:flex flex-row justify-between items-center px-[100px] text-white duration-500 ease-in-out transition-all shadow-lg`}
+        } lg:z-40 lg:w-full h-[90px] top-0 lg:flex flex-row justify-between items-center px-[100px] text-white duration-500 ease-in-out transition-all shadow-lg`}
       >
         <div className={`gap-[58px] relative z-10 flex flex-row nav-link`}>
           {routeLocation.pathname == "/" ? (
             <>
-              <ScrollLink
-                to="about"
-                smooth="true"
-                duration={500}
-                offset={offset}
-                className="select-none tracking-[1.5px] cursor-pointer"
-              >
-                About
-              </ScrollLink>
-              <ScrollLink
-                to="vision"
-                smooth="true"
-                duration={500}
-                offset={offset}
-                className="select-none tracking-[1.5px] cursor-pointer"
-              >
-                Vision
-              </ScrollLink>
-              <ScrollLink
-                to="mission"
-                smooth="true"
-                duration={500}
-                offset={offset}
-                className="select-none tracking-[1.5px] cursor-pointer"
-              >
-                Mission
-              </ScrollLink>
+              <button onClick={() => setIsNavOpen((prev) => !prev)}>Community</button>
               <Link to="/monster-list" className="select-none tracking-[1.5px] cursor-pointer">
                 Monster
               </Link>
+              <Link to="/equip-list" className="select-none tracking-[1.5px] cursor-pointer">
+                Equip
+              </Link>
             </>
-          ) : (
+          ) : routeLocation.pathname == "/monster-list" ||
+            routeLocation.pathname == "/monster-exp" ||
+            routeLocation.pathname == "/monster-drop" ? (
             <>
               <Link to="/monster-list" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
                 Monster
               </Link>
+              <Link to="/monster-exp" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Exp
+              </Link>
+              <Link to="/monster-drop" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Drop
+              </Link>
+            </>
+          ) : routeLocation.pathname == "/equip-list" ? (
+            <>
               <Link to="/equip-list" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
                 Equip
               </Link>
-              <Link to="/cardawakening" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
-                Awaken
-              </Link>
-              <Link to="/cardcollection" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
-                Collection
+            </>
+          ) : (
+            <>
+              <Link to="/equip-list" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Equip
               </Link>
             </>
           )}

@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 const Layout = lazy(() => import("./components/Layout/Layout"));
 const Home = lazy(() => import("./pages/Home"));
 const Monster = lazy(() => import("./pages/Monster/"));
+const MonsterExp = lazy(() => import("./pages/MonsterExp/"));
 const Awaken = lazy(() => import("./pages/Awaken/"));
 const Collection = lazy(() => import("./pages/Collection/"));
 const Equip = lazy(() => import("./pages/Equip/"));
@@ -31,6 +32,14 @@ function App() {
           element={
             <Suspense fallback={<p>Loading</p>}>
               <Monster />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/monster-exp"
+          element={
+            <Suspense fallback={<p>Loading</p>}>
+              <MonsterExp />
             </Suspense>
           }
         />
