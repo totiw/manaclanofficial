@@ -45,7 +45,7 @@ const Table = ({ monsterDrop }) => {
           <img src={ArrowIcon} alt="arrow icon" />
         </span>
         <h2 className="mt-5 flex flex-row justify-center lg:justify-start gap-3 tracking-[1px] text-2xl lg:text-4xl font-bold text-white select-none">
-          DATA <span className="text-[#6BCBDD]">MONSTER EXP</span>
+          DATA <span className="text-[#6BCBDD]">MONSTER DROP</span>
         </h2>
         <span className="w-[20%] lg:w-[15%] h-1 lg:h-2 bg-[#EA0A8C] flex flex-row mt-5"></span>
         <p className="text-white mt-3">Total {sortedData == null ? monsterDrop.length : sortedData.length} Items</p>
