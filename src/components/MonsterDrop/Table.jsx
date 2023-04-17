@@ -151,7 +151,7 @@ const Table = ({ monsterDrop }) => {
                       />
                     </span>
                   </div>
-                  <div className="h-[300px] basis-3/12 flex flex-col flex-wrap">
+                  <div className="h-[300px] basis-3/12 flex flex-col items-center justify-center flex-wrap">
                     {monster.dropplus.map((drop) => (
                       <span className="w-[30%]">
                         <LazyLoadImage
