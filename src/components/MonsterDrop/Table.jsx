@@ -151,9 +151,9 @@ const Table = ({ monsterDrop }) => {
                       />
                     </span>
                   </div>
-                  <div className="h-[300px] basis-3/12 flex flex-col items-center justify-center flex-wrap">
+                  <div className="min-h-[200px] basis-3/12 flex flex-col items-center justify-center gap-1 flex-wrap">
                     {monster.dropplus.map((drop) => (
-                      <span className="w-[30%]">
+                      <span className="w-[40%]">
                         <LazyLoadImage
                           effect="blur"
                           src={drop}
