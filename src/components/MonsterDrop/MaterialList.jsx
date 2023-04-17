@@ -19,8 +19,8 @@ import Super2 from "../../assets/MonsterDrop/super-2.webp";
 const MaterialList = () => {
   const [material, setMaterial] = useState("low");
   return (
-    <div className="w-[80%]">
-      <h3 className="text-white text-2xl lg:text-4xl font-bold tracking-[1px]">
+    <div className="w-[80%] lg:w-[60%]">
+      <h3 className="text-white text-center text-2xl lg:text-4xl font-bold tracking-[1px]">
         MATERIAL <span className="text-[#6BCBDD]">LIST</span>
       </h3>
       <select

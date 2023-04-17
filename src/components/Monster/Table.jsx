@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ArrowIcon from "../../assets/Utils/icons/arrow-right-solid.svg";
+import SortIcon from "../../assets/Utils/icons/sort-solid.svg";
 // import Details from "./Details";
 const Tabel = ({ monsters }) => {
   const navigate = useNavigate();
+  const [sorting, setSorting] = useState(1);
   const [sortedData, setSortedData] = useState(null);
   // const [breakPoint, setBreakPoint] = useState("desktop");
   // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // SORTED WITH INPUT
+  // SEARCH WITH INPUT
   const handleFilterNum = (event) => {
     const name = event.target.name;
     const filtered = monsters.filter(
@@ -38,6 +40,14 @@ const Tabel = ({ monsters }) => {
       // setIsDataChanging(true);
     }
   };
+
+  useEffect(() => {
+    if (sortedData != null) {
+      setSortedData(sortedData.sort(() => sorting));
+    } else {
+      monsters.sort(() => sorting);
+    }
+  }, [sorting]);
 
   // GET DETAILS PER MONSTER
   // const getDetails = (monster) => {
@@ -97,7 +107,15 @@ const Tabel = ({ monsters }) => {
             <h2 className={`basis-full`}>Monster</h2>
             {/* Name */}
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
-              <span>Name</span>
+              <button
+                onClick={() => {
+                  setSorting((prev) => prev * -1);
+                }}
+                className="flex flex-row items-center"
+              >
+                Name
+                {/* <img src={SortIcon} alt="sort icon" className="w-3 opacity-80" /> */}
+              </button>
               <input
                 type="text"
                 name="name"
