@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import axios from "../../components/api/axios";
 import Neon from "../../assets/Utils/black-neon.webp";
 const Tabel = lazy(() => import("../../components/MonsterDrop/Table"));
+const MaterialList = lazy(() => import("../../components/MonsterDrop/MaterialList"));
 const Monster = () => {
   const [monsterDrop, setMonsters] = useState([]);
   const getMonsterDrop = async () => {
@@ -28,6 +29,7 @@ const Monster = () => {
         <Suspense fallback={<p>Loading..</p>}>
           <Tabel monsterDrop={monsterDrop} />
         </Suspense>
+        <MaterialList />
       </div>
     </>
   );
