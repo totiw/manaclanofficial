@@ -4,6 +4,7 @@ const Layout = lazy(() => import("./components/Layout/Layout"));
 const Home = lazy(() => import("./pages/Home"));
 const Monster = lazy(() => import("./pages/Monster/"));
 const MonsterExp = lazy(() => import("./pages/MonsterExp/"));
+const MonsterDrop = lazy(() => import("./pages/MonsterDrop/"));
 const Awaken = lazy(() => import("./pages/Awaken/"));
 const Collection = lazy(() => import("./pages/Collection/"));
 const Equip = lazy(() => import("./pages/Equip/"));
@@ -40,6 +41,14 @@ function App() {
           element={
             <Suspense fallback={<p>Loading</p>}>
               <MonsterExp />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/monster-drop"
+          element={
+            <Suspense fallback={<p>Loading</p>}>
+              <MonsterDrop />
             </Suspense>
           }
         />
