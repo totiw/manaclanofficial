@@ -37,7 +37,7 @@ const Table = ({ awakens }) => {
         <span className="w-[20%] lg:w-[15%] h-1 lg:h-2 bg-[#EA0A8C] flex flex-row mt-5"></span>
         <p className="text-white mt-3">Total {sortedData == null ? awakens.length : sortedData.length} Items</p>
       </div>
-      <div className="relative overflow-auto z-20 w-full lg:w-[80%] lg:min-h-[100%] flex flex-col gap-5">
+      <div className="select-none relative overflow-auto z-20 w-full lg:w-[80%] lg:min-h-[100%] flex flex-col gap-5">
         <div className="flex flex-col relative z-10">
           <div className="w-[1080px] lg:w-full bg-gradient-to-r from-[#6BCBDD] to-[#63469B] background-animate flex flex-row text-center text-white text-sm lg:text-base font-bold tracking-[1px] rounded-t-lg py-5">
             <h2 className={`basis-1/12`}>#</h2>
@@ -49,7 +49,6 @@ const Table = ({ awakens }) => {
                 type="text"
                 name="name"
                 id="name"
-                autoFocus
                 onChange={handleFilterString}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -60,9 +59,8 @@ const Table = ({ awakens }) => {
               <select
                 name="slot"
                 id="slot"
-                value=""
                 onChange={handleFilterString}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
+                className="w-[85%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
               >
                 <option value=""></option>
                 <option value="Muffler" className="capitalize">

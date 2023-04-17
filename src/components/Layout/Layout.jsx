@@ -377,6 +377,9 @@ const Layout = () => {
               <Link to="/equip-list" className="select-none tracking-[1.5px] cursor-pointer">
                 Equip
               </Link>
+              <Link to="/cardcollection" className="select-none tracking-[1.5px] cursor-pointer">
+                Card
+              </Link>
             </>
           ) : routeLocation.pathname == "/monster-list" ||
             routeLocation.pathname == "/monster-exp" ||
@@ -398,10 +401,22 @@ const Layout = () => {
                 Equip
               </Link>
             </>
+          ) : routeLocation.pathname == "/cardcollection" || routeLocation.pathname == "/cardawakening" ? (
+            <>
+              <Link to="/cardcollection" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Card
+              </Link>
+              <Link to="/cardawakening" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Awakening
+              </Link>
+            </>
           ) : (
             <>
-              <Link to="/equip-list" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
-                Equip
+              <Link to="/card-collection" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Card
+              </Link>
+              <Link to="/card-awakening" className="select-none tracking-[1.5px]" onClick={() => setIsMenuOpen(false)}>
+                Awakening
               </Link>
             </>
           )}

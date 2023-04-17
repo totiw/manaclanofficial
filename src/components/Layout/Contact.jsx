@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Console from "../../assets/Utils/console.webp";
 import Neon from "../../assets/Utils/black-neon.webp";
 import Facebook from "../../assets/Socials/facebook.webp";
@@ -18,7 +19,11 @@ const Contact = () => {
         </div>
         <div className="flex flex-row items-center gap-3 lg:gap-10">
           <img src={Instagram} alt="facebook icon" className="w-[22px] lg:w-[64px]" />
-          <p className="text-white text-[12px] lg:text-3xl font-bold lg:tracking-[2px]">Manaclanid</p>
+          <p className="text-white text-[12px] lg:text-3xl font-bold lg:tracking-[2px]">
+            <Link to="https://www.instagram.com/manaclanid/" target="_blank">
+              Manaclanid
+            </Link>
+          </p>
         </div>
         <div className="flex flex-row items-center gap-3 lg:gap-10">
           <img src={Youtube} alt="facebook icon" className="w-[22px] lg:w-[64px]" />

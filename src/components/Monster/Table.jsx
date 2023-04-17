@@ -86,7 +86,6 @@ const Tabel = ({ monsters }) => {
   // });
   return (
     <>
-      {/* <Details isOpen={isDetailOpened} setIsOpen={setIsDetailOpened} data={selectedData} /> */}
       <div className="w-full lg:w-[80%] flex flex-col items-center lg:items-start">
         <span
           onClick={() => navigate(-1)}
@@ -100,7 +99,7 @@ const Tabel = ({ monsters }) => {
         <span className="w-[20%] lg:w-[15%] h-1 lg:h-2 bg-[#EA0A8C] flex flex-row mt-5"></span>
         <p className="text-white mt-3">Total {sortedData == null ? monsters.length : sortedData.length} Items</p>
       </div>
-      <div className="relative overflow-auto z-20 w-full lg:w-[80%] lg:min-h-[100%] flex flex-col gap-5">
+      <div className="select-none relative overflow-auto z-20 w-full lg:w-[80%] lg:min-h-[100%] flex flex-col gap-5">
         <div className="flex flex-col relative z-10">
           <div className="w-[1080px] lg:w-full bg-gradient-to-r from-[#6BCBDD] to-[#63469B] background-animate flex flex-row text-center text-white text-sm lg:text-base font-bold tracking-[1px] rounded-t-lg py-5">
             <h2 className={`basis-full`}>#</h2>
@@ -120,9 +119,8 @@ const Tabel = ({ monsters }) => {
                 type="text"
                 name="name"
                 id="name"
-                autoFocus
                 onChange={handleFilterString}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-[85%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* TYPE */}
@@ -131,9 +129,8 @@ const Tabel = ({ monsters }) => {
               <select
                 name="type"
                 id="type"
-                value=""
                 onChange={handleFilterString}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
+                className="w-[85%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
               >
                 <option value=""></option>
                 <option value="undead" className="capitalize">
@@ -171,9 +168,8 @@ const Tabel = ({ monsters }) => {
               <select
                 name="element"
                 id="element"
-                value=""
                 onChange={handleFilterString}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
+                className="w-[85%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
               >
                 <option value=""></option>
                 <option value="dark" className="capitalize">
@@ -217,9 +213,8 @@ const Tabel = ({ monsters }) => {
               <select
                 name="size"
                 id="size"
-                value=""
                 onChange={handleFilterString}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
+                className="w-[85%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
               >
                 <option value=""></option>
                 <option value="small" className="capitalize">
@@ -240,6 +235,7 @@ const Tabel = ({ monsters }) => {
                 type="number"
                 name="hp"
                 id="hp"
+                min={0}
                 autoFocus
                 onChange={handleFilterString}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
@@ -252,7 +248,7 @@ const Tabel = ({ monsters }) => {
                 type="number"
                 name="atk"
                 id="atk"
-                autoFocus
+                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -264,7 +260,7 @@ const Tabel = ({ monsters }) => {
                 type="number"
                 name="def"
                 id="def"
-                autoFocus
+                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -276,7 +272,7 @@ const Tabel = ({ monsters }) => {
                 type="number"
                 name="hit"
                 id="hit"
-                autoFocus
+                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -288,7 +284,7 @@ const Tabel = ({ monsters }) => {
                 type="number"
                 name="matk"
                 id="matk"
-                autoFocus
+                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -300,7 +296,7 @@ const Tabel = ({ monsters }) => {
                 type="number"
                 name="mdef"
                 id="mdef"
-                autoFocus
+                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -312,7 +308,7 @@ const Tabel = ({ monsters }) => {
                 type="number"
                 name="flee"
                 id="flee"
-                autoFocus
+                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -324,88 +320,13 @@ const Tabel = ({ monsters }) => {
                 type="number"
                 name="lvl"
                 id="lvl"
-                autoFocus
+                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* <h2 className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>Info</h2> */}
           </div>
-          {/* {sortedData == null
-            ? currentMonsters.map((monster, index) => (
-                <div
-                  key={index}
-                  className={`bg-white flex flex-row items-center text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3`}
-                >
-                  <p className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/6"}`}>{monster.lvl}</p>
-                  <div
-                    className={`${
-                      breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"
-                    } flex flex-row justify-center`}
-                  >
-                    <LazyLoadImage
-                      effect="blur"
-                      placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                      src={monster.image}
-                      alt={monster.name}
-                      className="w-14"
-                    />
-                  </div>
-                  <p className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>{monster.name}</p>
-                  {breakPoint == "desktop" && (
-                    <>
-                      <p className="basis-[14.2857143%]">{monster.type}</p>
-                      <p className="basis-[14.2857143%]">{monster.hit}</p>
-                      <p className="basis-[14.2857143%]">{monster.atk}</p>
-                    </>
-                  )}
-                  <div className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>
-                    <button
-                      onClick={() => getDetails(monster)}
-                      className={`bg-gradient-to-r from-[#6BCBDD] to-[#6BCBDD] px-3 lg:px-5 py-2 rounded-md lg:rounded-lg text-white hover:from-[#4F9AA8] hover:to-[#EA0B8D] transition-all duration-500 ease-out`}
-                    >
-                      Details
-                    </button>
-                  </div>
-                </div>
-              ))
-            : sortedData.map((monster, index) => (
-                <div
-                  key={index}
-                  className={`bg-white flex flex-row items-center text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3`}
-                >
-                  <p className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/6"}`}>{monster.lvl}</p>
-                  <div
-                    className={`${
-                      breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"
-                    } flex flex-row justify-center`}
-                  >
-                    <LazyLoadImage
-                      effect="blur"
-                      src={monster.image}
-                      alt={monster.name}
-                      className="w-14"
-                      placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                    />
-                  </div>
-                  <p className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>{monster.name}</p>
-                  {breakPoint == "desktop" && (
-                    <>
-                      <p className="basis-[14.2857143%]">{monster.type}</p>
-                      <p className="basis-[14.2857143%]">{monster.hit}</p>
-                      <p className="basis-[14.2857143%]">{monster.atk}</p>
-                    </>
-                  )}
-                  <div className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>
-                    <button
-                      onClick={() => getDetails(monster)}
-                      className={`bg-gradient-to-r from-[#6BCBDD] to-[#6BCBDD] px-3 lg:px-5 py-2 rounded-md lg:rounded-lg text-white hover:from-[#4F9AA8] hover:to-[#EA0B8D] transition-all duration-500 ease-out`}
-                    >
-                      Details
-                    </button>
-                  </div>
-                </div>
-              ))} */}
           {sortedData == null
             ? monsters.map((monster, index) => (
                 <div
@@ -437,15 +358,6 @@ const Tabel = ({ monsters }) => {
                   <p className="basis-full">{monster.mdef}</p>
                   <p className="basis-full">{monster.flee}</p>
                   <p className={`basis-full`}>{monster.lvl}</p>
-
-                  {/* <div className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>
-                <button
-                  onClick={() => getDetails(monster)}
-                  className={`bg-gradient-to-r from-[#6BCBDD] to-[#6BCBDD] px-3 lg:px-5 py-2 rounded-md lg:rounded-lg text-white hover:from-[#4F9AA8] hover:to-[#EA0B8D] transition-all duration-500 ease-out`}
-                >
-                  Details
-                </button>
-              </div> */}
                 </div>
               ))
             : sortedData.map((monster, index) => (
@@ -478,15 +390,6 @@ const Tabel = ({ monsters }) => {
                   <p className="basis-full">{monster.mdef}</p>
                   <p className="basis-full">{monster.flee}</p>
                   <p className={`basis-full`}>{monster.lvl}</p>
-
-                  {/* <div className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>
-                <button
-                  onClick={() => getDetails(monster)}
-                  className={`bg-gradient-to-r from-[#6BCBDD] to-[#6BCBDD] px-3 lg:px-5 py-2 rounded-md lg:rounded-lg text-white hover:from-[#4F9AA8] hover:to-[#EA0B8D] transition-all duration-500 ease-out`}
-                >
-                  Details
-                </button>
-              </div> */}
                 </div>
               ))}
         </div>

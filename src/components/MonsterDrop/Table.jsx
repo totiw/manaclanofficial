@@ -50,19 +50,18 @@ const Table = ({ monsterDrop }) => {
         <span className="w-[20%] lg:w-[15%] h-1 lg:h-2 bg-[#EA0A8C] flex flex-row mt-5"></span>
         <p className="text-white mt-3">Total {sortedData == null ? monsterDrop.length : sortedData.length} Items</p>
       </div>
-      <div className="relative overflow-auto z-20 w-full lg:w-[80%] lg:min-h-[100%] flex flex-col gap-5">
+      <div className="select-none relative overflow-auto z-20 w-full lg:w-[80%] lg:min-h-[100%] flex flex-col gap-5">
         <div className="flex flex-col relative z-10">
           <div className="w-[1080px] lg:w-full bg-gradient-to-r from-[#6BCBDD] to-[#63469B] background-animate flex flex-row text-center text-white text-sm lg:text-base font-bold tracking-[1px] rounded-t-lg py-5">
             <h2 className={`basis-1/12`}>#</h2>
             <h2 className={`basis-1/12`}>IMAGE</h2>
             {/* NAME */}
-            <h2 className={`basis-1/12 lg:basis-3/12 flex flex-col items-center gap-3`}>
+            <h2 className={`basis-1/12 lg:basis-1/12 flex flex-col items-center gap-3`}>
               <span>NAME</span>
               <input
                 type="text"
                 name="name"
                 id="name"
-                autoFocus
                 onChange={handleFilterString}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -71,10 +70,10 @@ const Table = ({ monsterDrop }) => {
             <h2 className={`basis-1/12 lg:basis-1/12 flex flex-col items-center gap-3`}>
               <span>BASE</span>
               <input
-                type="text"
+                type="number"
                 name="base"
                 id="base"
-                autoFocus
+                min={0}
                 onChange={handleFilterString}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -83,7 +82,7 @@ const Table = ({ monsterDrop }) => {
             <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
               <span>EXP</span>
               <input
-                type="text"
+                type="number"
                 name="exp"
                 id="exp"
                 onChange={handleFilterString}
@@ -91,7 +90,7 @@ const Table = ({ monsterDrop }) => {
               />
             </h2>
             {/* LOCATION */}
-            <h2 className={`basis-1/12 lg:basis-1/12 flex flex-col items-center gap-3`}>
+            <h2 className={`basis-1/12 lg:basis-3/12 flex flex-col items-center gap-3`}>
               <span>LOCATION</span>
               <input
                 type="text"
@@ -105,7 +104,7 @@ const Table = ({ monsterDrop }) => {
             <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
               <span>LEVEL</span>
               <input
-                type="text"
+                type="number"
                 name="lvl"
                 id="lvl"
                 onChange={handleFilterNum}
@@ -136,10 +135,10 @@ const Table = ({ monsterDrop }) => {
                       />
                     </span>
                   </div>
-                  <p className={`basis-1/12 lg:basis-3/12`}>{monster.name}</p>
+                  <p className={`basis-1/12 lg:basis-1/12`}>{monster.name}</p>
                   <p className="basis-1/12 lg:basis-1/12">{monster.base}</p>
                   <p className="basis-1/12">{monster.exp}</p>
-                  <p className="basis-1/12 lg:basis-1/12">{monster.location}</p>
+                  <p className="basis-1/12 lg:basis-3/12">{monster.location}</p>
                   <p className="basis-1/12">{monster.lvl}</p>
                   <div className={`basis-2/12 flex flex-row justify-center`}>
                     <span className="w-[80%]">
@@ -152,8 +151,8 @@ const Table = ({ monsterDrop }) => {
                     </span>
                   </div>
                   <div className="min-h-[200px] basis-3/12 flex flex-col items-center justify-center gap-1 flex-wrap">
-                    {monster.dropplus.map((drop) => (
-                      <span className="w-[40%]">
+                    {monster.dropplus.map((drop, index) => (
+                      <span className="w-[40%]" key={index}>
                         <LazyLoadImage
                           effect="blur"
                           src={drop}
@@ -183,10 +182,10 @@ const Table = ({ monsterDrop }) => {
                       />
                     </span>
                   </div>
-                  <p className={`basis-1/12 lg:basis-3/12`}>{monster.name}</p>
+                  <p className={`basis-1/12 lg:basis-1/12`}>{monster.name}</p>
                   <p className="basis-1/12 lg:basis-1/12">{monster.base}</p>
                   <p className="basis-1/12">{monster.exp}</p>
-                  <p className="basis-1/12 lg:basis-1/12">{monster.location}</p>
+                  <p className="basis-1/12 lg:basis-3/12">{monster.location}</p>
                   <p className="basis-1/12">{monster.lvl}</p>
                   <div className={`basis-2/12 flex flex-row justify-center`}>
                     <span className="w-[80%]">
@@ -198,7 +197,7 @@ const Table = ({ monsterDrop }) => {
                       />
                     </span>
                   </div>
-                  <div className="h-[300px] basis-3/12 flex flex-col flex-wrap">
+                  <div className="h-[300px] basis-3/12 flex flex-col items-center justify-center flex-wrap">
                     {monster.dropplus.map((drop) => (
                       <span className="w-[30%]">
                         <LazyLoadImage
