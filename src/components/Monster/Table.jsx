@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import ArrowIcon from "../../assets/Utils/icons/arrow-right-solid.svg";
 // import Details from "./Details";
-const Tabel = ({ monsters, setIsDataChanging }) => {
+const Tabel = ({ monsters }) => {
+  const navigate = useNavigate();
   const [sortedData, setSortedData] = useState(null);
-  const [breakPoint, setBreakPoint] = useState("desktop");
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  // const [breakPoint, setBreakPoint] = useState("desktop");
+  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // SORTED WITH INPUT
   const handleFilterNum = (event) => {
@@ -15,10 +18,10 @@ const Tabel = ({ monsters, setIsDataChanging }) => {
     );
     if (event.target.value == "") {
       setSortedData(null);
-      setIsDataChanging(false);
+      // setIsDataChanging(false);
     } else {
       setSortedData(filtered);
-      setIsDataChanging(true);
+      // setIsDataChanging(true);
     }
   };
 
@@ -29,52 +32,58 @@ const Tabel = ({ monsters, setIsDataChanging }) => {
     );
     if (event.target.value.toLowerCase() == "") {
       setSortedData(null);
-      setIsDataChanging(false);
+      // setIsDataChanging(false);
     } else {
       setSortedData(filtered);
-      setIsDataChanging(true);
+      // setIsDataChanging(true);
     }
   };
 
   // GET DETAILS PER MONSTER
-  const getDetails = (monster) => {
-    setSelectedData({
-      ...selectedData,
-      lvl: monster.lvl,
-      name: monster.name,
-      image: monster.image,
-      size: monster.size,
-      type: monster.type,
-      element: monster.element,
-      hp: monster.hp,
-      atk: monster.atk,
-      def: monster.def,
-      matk: monster.matk,
-      mdef: monster.mdef,
-      hit: monster.hit,
-      flee: monster.flee,
-    });
-    setIsDetailOpened(true);
-  };
+  // const getDetails = (monster) => {
+  //   setSelectedData({
+  //     ...selectedData,
+  //     lvl: monster.lvl,
+  //     name: monster.name,
+  //     image: monster.image,
+  //     size: monster.size,
+  //     type: monster.type,
+  //     element: monster.element,
+  //     hp: monster.hp,
+  //     atk: monster.atk,
+  //     def: monster.def,
+  //     matk: monster.matk,
+  //     mdef: monster.mdef,
+  //     hit: monster.hit,
+  //     flee: monster.flee,
+  //   });
+  //   setIsDetailOpened(true);
+  // };
 
   // DETECT WINDOW WIDTH
-  const detectWidth = () => {
-    setWindowWidth(window.innerWidth);
-  };
+  // const detectWidth = () => {
+  //   setWindowWidth(window.innerWidth);
+  // };
 
-  useEffect(() => {
-    if (windowWidth > 576) {
-      setBreakPoint("desktop");
-    } else if (windowWidth < 576) {
-      setBreakPoint("mobile");
-    }
+  // useEffect(() => {
+  //   if (windowWidth > 576) {
+  //     setBreakPoint("desktop");
+  //   } else if (windowWidth < 576) {
+  //     setBreakPoint("mobile");
+  //   }
 
-    window.addEventListener("resize", detectWidth);
-  });
+  //   window.addEventListener("resize", detectWidth);
+  // });
   return (
     <>
       {/* <Details isOpen={isDetailOpened} setIsOpen={setIsDetailOpened} data={selectedData} /> */}
       <div className="w-full lg:w-[80%] flex flex-col items-center lg:items-start">
+        <span
+          onClick={() => navigate(-1)}
+          className="hidden w-8 lg:flex flex-row rotate-180 mb-5 lg:-translate-x-10 cursor-pointer"
+        >
+          <img src={ArrowIcon} alt="arrow icon" />
+        </span>
         <h2 className="mt-5 flex flex-row justify-center lg:justify-start gap-3 tracking-[1px] text-2xl lg:text-4xl font-bold text-white select-none">
           DATA <span className="text-[#6BCBDD]">MONSTER</span>
         </h2>

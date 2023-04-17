@@ -1,17 +1,17 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import axios from "../../components/api/axios";
 import Neon from "../../assets/Utils/black-neon.webp";
-const Tabel = lazy(() => import("../../components/Monster/Tabel"));
-const Pagination = lazy(() => import("../../components/Monster/Pagination"));
+const Tabel = lazy(() => import("../../components/Monster/Table"));
+// const Pagination = lazy(() => import("../../components/Monster/Pagination"));
 const Monster = () => {
-  const [isDataChanging, setIsDataChanging] = useState(false);
+  // const [isDataChanging, setIsDataChanging] = useState(false);
   const [monsters, setMonsters] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [monsterPerPage, setMonsterPerPage] = useState(10);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [monsterPerPage, setMonsterPerPage] = useState(10);
 
-  const lastMonsterIndex = currentPage * monsterPerPage;
-  const firsMonsterIndex = lastMonsterIndex - monsterPerPage;
-  const currentMonsters = monsters.slice(firsMonsterIndex, lastMonsterIndex);
+  // const lastMonsterIndex = currentPage * monsterPerPage;
+  // const firsMonsterIndex = lastMonsterIndex - monsterPerPage;
+  // const currentMonsters = monsters.slice(firsMonsterIndex, lastMonsterIndex);
 
   const getMonster = async () => {
     try {
@@ -23,6 +23,7 @@ const Monster = () => {
   };
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     getMonster();
   }, []);
   return (
@@ -34,7 +35,7 @@ const Monster = () => {
         className="relative z-10 w-full lg:min-h-[87vh] flex flex-col items-center lg:py-6 gap-8 lg:gap-10"
       >
         <Suspense fallback={<p>Loading..</p>}>
-          <Tabel monsters={monsters} setIsDataChanging={setIsDataChanging} />
+          <Tabel monsters={monsters} />
         </Suspense>
         {/* <Suspense fallback={<p>Loading..</p>}>
           <Pagination
