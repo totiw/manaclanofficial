@@ -1,44 +1,50 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ArrowIcon from "../../assets/Utils/icons/arrow-right-solid.svg";
+import SortIcon from "../../assets/Utils/icons/sort-solid.svg";
+import ManaWM from "../../assets/Utils/mana-wm.webp";
 
 const Table = ({ monsterExp }) => {
   const navigate = useNavigate();
+  const [sortDir, setSortDir] = useState(1);
+  const [sortBy, setSortBy] = useState("lvl");
   const [sortedData, setSortedData] = useState(null);
 
-  // SORTED WITH INPUT
+  // SORTING
+  const handleSort = (value) => {
+    setSortBy(value);
+    setSortDir((prev) => prev * -1);
+  };
+
+  // SEARCH WITH INPUT
   const handleFilterNum = (event) => {
     const name = event.target.name;
-    const filtered = monsterExp.filter(
-      (obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value)
-    );
+    const filtered = !sortedData
+      ? monsterExp.filter((obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value))
+      : sortedData.filter((obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value));
     if (event.target.value == "") {
       setSortedData(null);
-      // setIsDataChanging(false);
     } else {
       setSortedData(filtered);
-      // setIsDataChanging(true);
     }
   };
   const handleFilterString = (event) => {
     const name = event.target.name;
-    const filtered = monsterExp.filter(
-      (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
-    );
+    const filtered = !sortedData
+      ? monsterExp.filter(
+          (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
+        )
+      : sortedData.filter(
+          (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
+        );
     if (event.target.value.toLowerCase() == "") {
       setSortedData(null);
-      // setIsDataChanging(false);
     } else {
       setSortedData(filtered);
-      // setIsDataChanging(true);
     }
   };
-
-  useEffect(() => {
-    monsterExp = monsterExp.sort((a, b) => b.lvl - a.level);
-  }, []);
   return (
     <>
       <div className="w-full lg:w-[80%] flex flex-col items-center lg:items-start">
@@ -61,7 +67,9 @@ const Table = ({ monsterExp }) => {
             <h2 className={`basis-1/12`}>IMAGE</h2>
             {/* NAME */}
             <h2 className={`basis-1/12 lg:basis-3/12 flex flex-col items-center gap-3`}>
-              <span>NAME</span>
+              <button onClick={() => handleSort("name")} className="flex flex-row items-center gap-1">
+                NAME <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <input
                 type="text"
                 name="name"
@@ -71,37 +79,13 @@ const Table = ({ monsterExp }) => {
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
-            {/* CHAR BASE */}
-            {/* <h2 className={`basis-2/12 lg:basis-1/12 flex flex-col items-center gap-3`}>
-              <span>CHAR BASE</span>
-              <input
-                type="text"
-                name="char_base"
-                id="char_base"
-                autoFocus
-                onChange={handleFilterString}
-                className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
-              />
-            </h2> */}
-            {/* CHAR JOB */}
-            {/* <h2 className={`basis-2/12 flex flex-col items-center gap-3`}>
-              <span>CHAR JOB</span>
-              <input
-                type="text"
-                name="char_job"
-                id="char_job"
-                onChange={handleFilterString}
-                className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
-              />
-            </h2> */}
             {/* EXP BASE */}
             <h2 className={`basis-2/12 lg:basis-2/12 flex flex-col items-center gap-3`}>
               <span>EXP BASE</span>
               <input
-                type="number"
+                type="text"
                 name="exp_base"
                 id="exp_base"
-                min={0}
                 onChange={handleFilterString}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -110,10 +94,9 @@ const Table = ({ monsterExp }) => {
             <h2 className={`basis-2/12 lg:basis-2/12 flex flex-col items-center gap-3`}>
               <span>EXP JOB</span>
               <input
-                type="number"
+                type="text"
                 name="exp_job"
                 id="exp_job"
-                min={0}
                 onChange={handleFilterString}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -122,82 +105,96 @@ const Table = ({ monsterExp }) => {
             <h2 className={`basis-2/12 flex flex-col items-center gap-3`}>
               <span>TYPE</span>
               <input
-                type="number"
+                type="text"
                 name="type"
                 id="type"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* LEVEL */}
             <h2 className={`basis-2/12 flex flex-col items-center gap-3`}>
-              <span>LEVEL</span>
+              <button onClick={() => handleSort("lvl")} className="flex flex-row items-center gap-1">
+                LEVEL <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <input
-                type="number"
+                type="text"
                 name="lvl"
                 id="lvl"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
           </div>
           {sortedData == null
-            ? monsterExp.map((monster, index) => (
-                <div
-                  key={index}
-                  className={`w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                    monsterExp.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                  }`}
-                >
-                  <p className={`basis-1/12`}>{index + 1}</p>
-                  <div className={`basis-1/12 flex flex-row justify-center`}>
-                    <span className="w-[60%]">
-                      <LazyLoadImage
-                        effect="blur"
-                        src={monster.image}
-                        alt={monster.name}
-                        placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                      />
-                    </span>
-                  </div>
-                  <p className={`basis-1/12 lg:basis-3/12`}>{monster.name}</p>
-                  {/* <p className="basis-2/12 lg:basis-1/12">{monster.char_base}</p>
+            ? monsterExp
+                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                .map((monster, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
+                      monsterExp.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
+                    }`}
+                  >
+                    <img
+                      src={ManaWM}
+                      alt="mana watermark"
+                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                    />
+                    <p className={`basis-1/12`}>{index + 1}</p>
+                    <div className={`basis-1/12 flex flex-row justify-center`}>
+                      <span className="w-[60%]">
+                        <LazyLoadImage
+                          effect="blur"
+                          src={monster.image}
+                          alt={monster.name}
+                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                        />
+                      </span>
+                    </div>
+                    <p className={`basis-1/12 lg:basis-3/12`}>{monster.name}</p>
+                    {/* <p className="basis-2/12 lg:basis-1/12">{monster.char_base}</p>
                   <p className="basis-2/12">{monster.char_job}</p> */}
-                  <p className="basis-2/12 lg:basis-2/12">{monster.exp_base}</p>
-                  <p className="basis-2/12 lg:basis-2/12">{monster.exp_job}</p>
-                  <p className="basis-2/12">{monster.type}</p>
-                  <p className="basis-2/12">{monster.lvl}</p>
-                </div>
-              ))
-            : sortedData.map((monster, index) => (
-                <div
-                  key={index}
-                  className={`w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                    sortedData.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                  }`}
-                >
-                  <p className={`basis-1/12`}>{index + 1}</p>
-                  <div className={`basis-1/12 flex flex-row justify-center`}>
-                    <span className="w-[60%]">
-                      <LazyLoadImage
-                        effect="blur"
-                        src={monster.image}
-                        alt={monster.name}
-                        placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                      />
-                    </span>
+                    <p className="basis-2/12 lg:basis-2/12">{monster.exp_base}</p>
+                    <p className="basis-2/12 lg:basis-2/12">{monster.exp_job}</p>
+                    <p className="basis-2/12">{monster.type}</p>
+                    <p className="basis-2/12">{monster.lvl}</p>
                   </div>
-                  <p className={`basis-1/12 lg:basis-3/12`}>{monster.name}</p>
-                  {/* <p className="basis-2/12 lg:basis-1/12">{monster.char_base}</p>
+                ))
+            : sortedData
+                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                .map((monster, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
+                      sortedData.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
+                    }`}
+                  >
+                    <img
+                      src={ManaWM}
+                      alt="mana watermark"
+                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                    />
+                    <p className={`basis-1/12`}>{index + 1}</p>
+                    <div className={`basis-1/12 flex flex-row justify-center`}>
+                      <span className="w-[60%]">
+                        <LazyLoadImage
+                          effect="blur"
+                          src={monster.image}
+                          alt={monster.name}
+                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                        />
+                      </span>
+                    </div>
+                    <p className={`basis-1/12 lg:basis-3/12`}>{monster.name}</p>
+                    {/* <p className="basis-2/12 lg:basis-1/12">{monster.char_base}</p>
                   <p className="basis-2/12">{monster.char_job}</p> */}
-                  <p className="basis-2/12 lg:basis-2/12">{monster.exp_base}</p>
-                  <p className="basis-2/12 lg:basis-2/12">{monster.exp_job}</p>
-                  <p className="basis-2/12">{monster.type}</p>
-                  <p className="basis-2/12">{monster.lvl}</p>
-                </div>
-              ))}
+                    <p className="basis-2/12 lg:basis-2/12">{monster.exp_base}</p>
+                    <p className="basis-2/12 lg:basis-2/12">{monster.exp_job}</p>
+                    <p className="basis-2/12">{monster.type}</p>
+                    <p className="basis-2/12">{monster.lvl}</p>
+                  </div>
+                ))}
         </div>
       </div>
     </>

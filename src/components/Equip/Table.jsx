@@ -3,16 +3,27 @@ import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ArrowIcon from "../../assets/Utils/icons/arrow-right-solid.svg";
+import SortIcon from "../../assets/Utils/icons/sort-solid.svg";
+import ManaWM from "../../assets/Utils/mana-wm.webp";
+
 const Table = ({ equips }) => {
   const navigate = useNavigate();
+  const [sortDir, setSortDir] = useState(1);
+  const [sortBy, setSortBy] = useState("lvl");
   const [sortedData, setSortedData] = useState(null);
+
+  // SORTING
+  const handleSort = (value) => {
+    setSortBy(value);
+    setSortDir((prev) => prev * -1);
+  };
 
   // SORTED WITH INPUT
   const handleFilterNum = (event) => {
     const name = event.target.name;
-    const filtered = equips.filter(
-      (obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value)
-    );
+    const filtered = !sortedData
+      ? equips.filter((obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value))
+      : sortedData.filter((obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value));
     if (event.target.value == "") {
       setSortedData(null);
       // setIsDataChanging(false);
@@ -24,9 +35,13 @@ const Table = ({ equips }) => {
 
   const handleFilterString = (event) => {
     const name = event.target.name;
-    const filtered = equips.filter(
-      (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
-    );
+    const filtered = !sortedData
+      ? equips.filter(
+          (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
+        )
+      : sortedData.filter(
+          (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
+        );
     if (event.target.value.toLowerCase() == "") {
       setSortedData(null);
       // setIsDataChanging(false);
@@ -57,7 +72,10 @@ const Table = ({ equips }) => {
             <h2 className={`basis-1/12`}>IMAGE</h2>
             {/* NAME */}
             <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
-              <span>NAME</span>
+              <button onClick={() => handleSort("name")} className="flex flex-row items-center gap-1">
+                NAME
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <input
                 type="text"
                 name="name"
@@ -68,24 +86,28 @@ const Table = ({ equips }) => {
             </h2>
             {/* LEVEL */}
             <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
-              <span>LEVEL</span>
+              <button onClick={() => handleSort("lvl")} className="flex flex-row items-center gap-1">
+                LEVEL
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <input
-                type="number"
+                type="text"
                 name="lvl"
                 id="lvl"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* POWER */}
             <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
-              <span>POWER</span>
+              <button onClick={() => handleSort("power")} className="flex flex-row items-center gap-1">
+                POWER
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <input
-                type="number"
+                type="text"
                 name="power"
                 id="power"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -116,10 +138,9 @@ const Table = ({ equips }) => {
             <h2 className={`basis-1/12 flex flex-col items-center gap-3`}>
               <span>SLOT</span>
               <input
-                type="number"
+                type="text"
                 name="slot"
                 id="slot"
-                min={0}
                 onChange={handleFilterString}
                 className="w-[90%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -130,88 +151,102 @@ const Table = ({ equips }) => {
             <h2 className={`basis-2/12`}>CRAFT</h2>
           </div>
           {sortedData == null
-            ? equips.map((equip, index) => (
-                <div
-                  key={index}
-                  className={`w-[1920px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                    equips.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                  }`}
-                >
-                  <p className={`basis-1/12`}>{index + 1}</p>
-                  <div className={`basis-1/12 flex flex-row justify-center`}>
-                    <span className="w-[60%]">
-                      <LazyLoadImage
-                        effect="blur"
-                        src={equip.image}
-                        alt={equip.name}
-                        placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                      />
-                    </span>
-                  </div>
-                  <p className={`basis-1/12`}>{equip.name}</p>
-                  <p className="basis-1/12">{equip.lvl}</p>
-                  <p className="basis-1/12">{equip.power}</p>
-                  <p className="basis-1/12">{equip.type}</p>
-                  <p className="basis-3/12 text-center">{equip.job}</p>
-                  <p className="basis-1/12">{equip.slot}</p>
-                  <p className="basis-3/12 text-xs">{equip.desc}</p>
-                  <div className={`basis-2/12 flex flex-row justify-center`}>
-                    {equip.craft ? (
+            ? equips
+                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                .map((equip, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden w-[1920px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
+                      equips.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
+                    }`}
+                  >
+                    <img
+                      src={ManaWM}
+                      alt="mana watermark"
+                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                    />
+                    <p className={`basis-1/12`}>{index + 1}</p>
+                    <div className={`basis-1/12 flex flex-row justify-center`}>
                       <span className="w-[60%]">
                         <LazyLoadImage
                           effect="blur"
-                          src={equip.craft}
+                          src={equip.image}
                           alt={equip.name}
                           placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
                         />
                       </span>
-                    ) : (
-                      <p>No Image Displayed</p>
-                    )}
+                    </div>
+                    <p className={`basis-1/12 text-sm`}>{equip.name}</p>
+                    <p className="basis-1/12">{equip.lvl}</p>
+                    <p className="basis-1/12">{equip.power}</p>
+                    <p className="basis-1/12 text-sm">{equip.type}</p>
+                    <p className="basis-3/12 text-center text-sm">{equip.job}</p>
+                    <p className="basis-1/12">{equip.slot}</p>
+                    <p className="basis-3/12 text-xs">{equip.desc}</p>
+                    <div className={`basis-2/12 flex flex-row justify-center`}>
+                      {equip.craft ? (
+                        <span className="w-[60%]">
+                          <LazyLoadImage
+                            effect="blur"
+                            src={equip.craft}
+                            alt={equip.name}
+                            placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                          />
+                        </span>
+                      ) : (
+                        <p className="text-sm">No Image Displayed</p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))
-            : sortedData.map((equip, index) => (
-                <div
-                  key={index}
-                  className={`w-[1920px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                    sortedData.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                  }`}
-                >
-                  <p className={`basis-1/12`}>{index + 1}</p>
-                  <div className={`basis-1/12 flex flex-row justify-center`}>
-                    <span className="w-[60%]">
-                      <LazyLoadImage
-                        effect="blur"
-                        src={equip.image}
-                        alt={equip.name}
-                        placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                      />
-                    </span>
-                  </div>
-                  <p className={`basis-1/12`}>{equip.name}</p>
-                  <p className="basis-1/12">{equip.lvl}</p>
-                  <p className="basis-1/12">{equip.power}</p>
-                  <p className="basis-1/12">{equip.type}</p>
-                  <p className="basis-3/12 text-center">{equip.job}</p>
-                  <p className="basis-1/12">{equip.slot}</p>
-                  <p className="basis-3/12 text-xs">{equip.desc}</p>
-                  <div className={`basis-2/12 flex flex-row justify-center`}>
-                    {equip.craft ? (
+                ))
+            : sortedData
+                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                .map((equip, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden w-[1920px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
+                      sortedData.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
+                    }`}
+                  >
+                    <img
+                      src={ManaWM}
+                      alt="mana watermark"
+                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                    />
+                    <p className={`basis-1/12`}>{index + 1}</p>
+                    <div className={`basis-1/12 flex flex-row justify-center`}>
                       <span className="w-[60%]">
                         <LazyLoadImage
                           effect="blur"
-                          src={equip.craft}
+                          src={equip.image}
                           alt={equip.name}
                           placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
                         />
                       </span>
-                    ) : (
-                      <p>No Image Displayed</p>
-                    )}
+                    </div>
+                    <p className={`basis-1/12 text-sm`}>{equip.name}</p>
+                    <p className="basis-1/12">{equip.lvl}</p>
+                    <p className="basis-1/12">{equip.power}</p>
+                    <p className="basis-1/12 text-sm">{equip.type}</p>
+                    <p className="basis-3/12 text-center text-sm">{equip.job}</p>
+                    <p className="basis-1/12">{equip.slot}</p>
+                    <p className="basis-3/12 text-xs">{equip.desc}</p>
+                    <div className={`basis-2/12 flex flex-row justify-center`}>
+                      {equip.craft ? (
+                        <span className="w-[60%]">
+                          <LazyLoadImage
+                            effect="blur"
+                            src={equip.craft}
+                            alt={equip.name}
+                            placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                          />
+                        </span>
+                      ) : (
+                        <p className="text-sm">No Image Displayed</p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
         </div>
       </div>
     </>

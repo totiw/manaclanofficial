@@ -3,16 +3,31 @@ import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ArrowIcon from "../../assets/Utils/icons/arrow-right-solid.svg";
+import SortIcon from "../../assets/Utils/icons/sort-solid.svg";
+import ManaWM from "../../assets/Utils/mana-wm.webp";
+
 const Table = ({ collections }) => {
   const navigate = useNavigate();
+  const [sortDir, setSortDir] = useState(1);
+  const [sortBy, setSortBy] = useState("name");
   const [sortedData, setSortedData] = useState(null);
 
-  // SORTED WITH INPUT
+  // SORTING
+  const handleSort = (value) => {
+    setSortBy(value);
+    setSortDir((prev) => prev * -1);
+  };
+
+  // SEARCH WITH INPUT
   const handleFilterString = (event) => {
     const name = event.target.name;
-    const filtered = collections.filter(
-      (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
-    );
+    const filtered = !sortedData
+      ? collections.filter(
+          (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
+        )
+      : sortedData.filter(
+          (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
+        );
     if (event.target.value.toLowerCase() == "") {
       setSortedData(null);
       // setIsDataChanging(false);
@@ -43,7 +58,10 @@ const Table = ({ collections }) => {
             <h2 className={`basis-1/12`}>IMAGE</h2>
             {/* MONSTER */}
             <h2 className={`basis-3/12 flex flex-col items-center gap-3`}>
-              <span>MONSTER</span>
+              <button onClick={() => handleSort("name")} className="flex flex-row items-center gap-1">
+                MONSTER
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <input
                 type="text"
                 name="name"
@@ -54,7 +72,10 @@ const Table = ({ collections }) => {
             </h2>
             {/* SLOT */}
             <h2 className={`basis-2/12 flex flex-col items-center gap-3`}>
-              <span>SLOT</span>
+              <button onClick={() => handleSort("slot")} className="flex flex-row items-center gap-1">
+                SLOT
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <select
                 name="slot"
                 id="slot"
@@ -107,52 +128,66 @@ const Table = ({ collections }) => {
             </h2>
           </div>
           {sortedData == null
-            ? collections.map((collections, index) => (
-                <div
-                  key={index}
-                  className={`w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                    collections.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                  }`}
-                >
-                  <p className={`basis-1/12`}>{index + 1}</p>
-                  <div className={`basis-1/12 flex flex-row justify-center`}>
-                    <span className="w-[60%]">
-                      <LazyLoadImage
-                        effect="blur"
-                        src={collections.image}
-                        alt={collections.name}
-                        placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                      />
-                    </span>
+            ? collections
+                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                .map((collections, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
+                      collections.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
+                    }`}
+                  >
+                    <img
+                      src={ManaWM}
+                      alt="mana watermark"
+                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                    />
+                    <p className={`basis-1/12`}>{index + 1}</p>
+                    <div className={`basis-1/12 flex flex-row justify-center`}>
+                      <span className="w-[60%]">
+                        <LazyLoadImage
+                          effect="blur"
+                          src={collections.image}
+                          alt={collections.name}
+                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                        />
+                      </span>
+                    </div>
+                    <p className={`basis-3/12`}>{collections.name}</p>
+                    <p className="basis-2/12">{collections.slot}</p>
+                    <p className="basis-5/12">{collections.card_collection}</p>
                   </div>
-                  <p className={`basis-3/12`}>{collections.name}</p>
-                  <p className="basis-2/12">{collections.slot}</p>
-                  <p className="basis-5/12">{collections.card_collection}</p>
-                </div>
-              ))
-            : sortedData.map((collections, index) => (
-                <div
-                  key={index}
-                  className={`w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                    sortedData.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                  }`}
-                >
-                  <p className={`basis-1/12`}>{index + 1}</p>
-                  <div className={`basis-1/12 flex flex-row justify-center`}>
-                    <span className="w-[60%]">
-                      <LazyLoadImage
-                        effect="blur"
-                        src={collections.image}
-                        alt={collections.name}
-                        placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                      />
-                    </span>
+                ))
+            : sortedData
+                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                .map((collections, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
+                      sortedData.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
+                    }`}
+                  >
+                    <img
+                      src={ManaWM}
+                      alt="mana watermark"
+                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                    />
+                    <p className={`basis-1/12`}>{index + 1}</p>
+                    <div className={`basis-1/12 flex flex-row justify-center`}>
+                      <span className="w-[60%]">
+                        <LazyLoadImage
+                          effect="blur"
+                          src={collections.image}
+                          alt={collections.name}
+                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                        />
+                      </span>
+                    </div>
+                    <p className={`basis-3/12`}>{collections.name}</p>
+                    <p className="basis-2/12">{collections.slot}</p>
+                    <p className="basis-5/12">{collections.card_collection}</p>
                   </div>
-                  <p className={`basis-3/12`}>{collections.name}</p>
-                  <p className="basis-2/12">{collections.slot}</p>
-                  <p className="basis-5/12">{collections.card_collection}</p>
-                </div>
-              ))}
+                ))}
         </div>
       </div>
     </>

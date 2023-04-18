@@ -1,79 +1,51 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ArrowIcon from "../../assets/Utils/icons/arrow-right-solid.svg";
 import SortIcon from "../../assets/Utils/icons/sort-solid.svg";
+import ManaWM from "../../assets/Utils/mana-wm.webp";
 // import Details from "./Details";
 const Tabel = ({ monsters }) => {
   const navigate = useNavigate();
-  const [sorting, setSorting] = useState(1);
+  const [sortDir, setSortDir] = useState(1);
+  const [sortBy, setSortBy] = useState("lvl");
   const [sortedData, setSortedData] = useState(null);
-  // const [breakPoint, setBreakPoint] = useState("desktop");
-  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // SORTING
+  const handleSort = (value) => {
+    setSortBy(value);
+    setSortDir((prev) => prev * -1);
+  };
 
   // SEARCH WITH INPUT
   const handleFilterNum = (event) => {
     const name = event.target.name;
-    const filtered = monsters.filter(
-      (obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value)
-    );
+    const filtered = !sortedData
+      ? monsters.filter((obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value))
+      : sortedData.filter((obj) => typeof obj[name] === "number" && obj[name].toString().includes(event.target.value));
     if (event.target.value == "") {
       setSortedData(null);
-      // setIsDataChanging(false);
     } else {
       setSortedData(filtered);
-      // setIsDataChanging(true);
     }
   };
 
   const handleFilterString = (event) => {
     const name = event.target.name;
-    const filtered = monsters.filter(
-      (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
-    );
+    const filtered = !sortedData
+      ? monsters.filter(
+          (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
+        )
+      : sortedData.filter(
+          (obj) => typeof obj[name] === "string" && obj[name].toLowerCase().includes(event.target.value.toLowerCase())
+        );
     if (event.target.value.toLowerCase() == "") {
       setSortedData(null);
-      // setIsDataChanging(false);
     } else {
       setSortedData(filtered);
-      // setIsDataChanging(true);
     }
   };
-
-  useEffect(() => {
-    if (sortedData != null) {
-      setSortedData(sortedData.sort(() => sorting));
-    } else {
-      monsters.sort(() => sorting);
-    }
-  }, [sorting]);
-
-  // GET DETAILS PER MONSTER
-  // const getDetails = (monster) => {
-  //   setSelectedData({
-  //     ...selectedData,
-  //     lvl: monster.lvl,
-  //     name: monster.name,
-  //     image: monster.image,
-  //     size: monster.size,
-  //     type: monster.type,
-  //     element: monster.element,
-  //     hp: monster.hp,
-  //     atk: monster.atk,
-  //     def: monster.def,
-  //     matk: monster.matk,
-  //     mdef: monster.mdef,
-  //     hit: monster.hit,
-  //     flee: monster.flee,
-  //   });
-  //   setIsDetailOpened(true);
-  // };
-
-  // DETECT WINDOW WIDTH
-  // const detectWidth = () => {
-  //   setWindowWidth(window.innerWidth);
-  // };
 
   // useEffect(() => {
   //   if (windowWidth > 576) {
@@ -106,14 +78,9 @@ const Tabel = ({ monsters }) => {
             <h2 className={`basis-full`}>Monster</h2>
             {/* Name */}
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
-              <button
-                onClick={() => {
-                  setSorting((prev) => prev * -1);
-                }}
-                className="flex flex-row items-center"
-              >
+              <button onClick={() => handleSort("name")} className="flex flex-row items-center gap-1">
                 Name
-                {/* <img src={SortIcon} alt="sort icon" className="w-3 opacity-80" /> */}
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
               </button>
               <input
                 type="text"
@@ -125,7 +92,10 @@ const Tabel = ({ monsters }) => {
             </h2>
             {/* TYPE */}
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
-              <span>Type</span>
+              <button onClick={() => handleSort("type")} className="flex flex-row items-center gap-1">
+                Type
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <select
                 name="type"
                 id="type"
@@ -164,7 +134,10 @@ const Tabel = ({ monsters }) => {
             </h2>
             {/* ELEMENT */}
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
-              <span>ELEMENT</span>
+              <button onClick={() => handleSort("element")} className="flex flex-row items-center gap-1">
+                ELEMENT
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <select
                 name="element"
                 id="element"
@@ -209,7 +182,10 @@ const Tabel = ({ monsters }) => {
             </h2>
             {/* SIZE */}
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
-              <span>SIZE</span>
+              <button onClick={() => handleSort("size")} className="flex flex-row items-center gap-1">
+                SIZE
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <select
                 name="size"
                 id="size"
@@ -232,11 +208,9 @@ const Tabel = ({ monsters }) => {
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
               <span>HP</span>
               <input
-                type="number"
+                type="text"
                 name="hp"
                 id="hp"
-                min={0}
-                autoFocus
                 onChange={handleFilterString}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -245,10 +219,9 @@ const Tabel = ({ monsters }) => {
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
               <span>ATK</span>
               <input
-                type="number"
+                type="text"
                 name="atk"
                 id="atk"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -257,10 +230,9 @@ const Tabel = ({ monsters }) => {
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
               <span>DEF</span>
               <input
-                type="number"
+                type="text"
                 name="def"
                 id="def"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -269,10 +241,9 @@ const Tabel = ({ monsters }) => {
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
               <span>HIT</span>
               <input
-                type="number"
+                type="text"
                 name="hit"
                 id="hit"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -281,10 +252,9 @@ const Tabel = ({ monsters }) => {
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
               <span>M-ATK</span>
               <input
-                type="number"
+                type="text"
                 name="matk"
                 id="matk"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -293,10 +263,9 @@ const Tabel = ({ monsters }) => {
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
               <span>M-DEF</span>
               <input
-                type="number"
+                type="text"
                 name="mdef"
                 id="mdef"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -305,22 +274,23 @@ const Tabel = ({ monsters }) => {
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
               <span>Flee</span>
               <input
-                type="number"
+                type="text"
                 name="flee"
                 id="flee"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* LVL */}
             <h2 className={`basis-full flex flex-col items-center gap-3`}>
-              <span>LVL</span>
+              <button onClick={() => handleSort("lvl")} className="flex flex-row items-center gap-1">
+                LVL
+                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+              </button>
               <input
-                type="number"
+                type="text"
                 name="lvl"
                 id="lvl"
-                min={0}
                 onChange={handleFilterNum}
                 className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
@@ -328,70 +298,84 @@ const Tabel = ({ monsters }) => {
             {/* <h2 className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>Info</h2> */}
           </div>
           {sortedData == null
-            ? monsters.map((monster, index) => (
-                <div
-                  key={index}
-                  className={`w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                    monsters.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                  }`}
-                >
-                  <p className={`basis-full`}>{index + 1}</p>
-                  <div className={`basis-full flex flex-row justify-center`}>
-                    <span className="w-[60%]">
-                      <LazyLoadImage
-                        effect="blur"
-                        src={monster.image}
-                        alt={monster.name}
-                        placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                      />
-                    </span>
+            ? monsters
+                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                .map((monster, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
+                      monsters.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
+                    }`}
+                  >
+                    <img
+                      src={ManaWM}
+                      alt="mana watermark"
+                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                    />
+                    <p className={`basis-full`}>{index + 1}</p>
+                    <div className={`basis-full flex flex-row justify-center`}>
+                      <span className="w-[60%]">
+                        <LazyLoadImage
+                          effect="blur"
+                          src={monster.image}
+                          alt={monster.name}
+                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                        />
+                      </span>
+                    </div>
+                    <p className={`basis-full`}>{monster.name}</p>
+                    <p className="basis-full">{monster.type}</p>
+                    <p className="basis-full">{monster.element}</p>
+                    <p className="basis-full">{monster.size}</p>
+                    <p className="basis-full">{monster.hp}</p>
+                    <p className="basis-full">{monster.atk}</p>
+                    <p className="basis-full">{monster.def}</p>
+                    <p className="basis-full">{monster.hit}</p>
+                    <p className="basis-full">{monster.matk}</p>
+                    <p className="basis-full">{monster.mdef}</p>
+                    <p className="basis-full">{monster.flee}</p>
+                    <p className={`basis-full`}>{monster.lvl}</p>
                   </div>
-                  <p className={`basis-full`}>{monster.name}</p>
-                  <p className="basis-full">{monster.type}</p>
-                  <p className="basis-full">{monster.element}</p>
-                  <p className="basis-full">{monster.size}</p>
-                  <p className="basis-full">{monster.hp}</p>
-                  <p className="basis-full">{monster.atk}</p>
-                  <p className="basis-full">{monster.def}</p>
-                  <p className="basis-full">{monster.hit}</p>
-                  <p className="basis-full">{monster.matk}</p>
-                  <p className="basis-full">{monster.mdef}</p>
-                  <p className="basis-full">{monster.flee}</p>
-                  <p className={`basis-full`}>{monster.lvl}</p>
-                </div>
-              ))
-            : sortedData.map((monster, index) => (
-                <div
-                  key={index}
-                  className={`w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                    sortedData.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                  }`}
-                >
-                  <p className={`basis-full`}>{index + 1}</p>
-                  <div className={`basis-full flex flex-row justify-center`}>
-                    <span className="w-[60%]">
-                      <LazyLoadImage
-                        effect="blur"
-                        src={monster.image}
-                        alt={monster.name}
-                        placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                      />
-                    </span>
+                ))
+            : sortedData
+                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                .map((monster, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
+                      sortedData.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
+                    }`}
+                  >
+                    <img
+                      src={ManaWM}
+                      alt="mana watermark"
+                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                    />
+                    <p className={`basis-full`}>{index + 1}</p>
+                    <div className={`basis-full flex flex-row justify-center`}>
+                      <span className="w-[60%]">
+                        <LazyLoadImage
+                          effect="blur"
+                          src={monster.image}
+                          alt={monster.name}
+                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                        />
+                      </span>
+                    </div>
+                    <p className={`basis-full`}>{monster.name}</p>
+                    <p className="basis-full">{monster.type}</p>
+                    <p className="basis-full">{monster.element}</p>
+                    <p className="basis-full">{monster.size}</p>
+                    <p className="basis-full">{monster.hp}</p>
+                    <p className="basis-full">{monster.atk}</p>
+                    <p className="basis-full">{monster.def}</p>
+                    <p className="basis-full">{monster.hit}</p>
+                    <p className="basis-full">{monster.matk}</p>
+                    <p className="basis-full">{monster.mdef}</p>
+                    <p className="basis-full">{monster.flee}</p>
+                    <p className={`basis-full`}>{monster.lvl}</p>
                   </div>
-                  <p className={`basis-full`}>{monster.name}</p>
-                  <p className="basis-full">{monster.type}</p>
-                  <p className="basis-full">{monster.element}</p>
-                  <p className="basis-full">{monster.size}</p>
-                  <p className="basis-full">{monster.hp}</p>
-                  <p className="basis-full">{monster.atk}</p>
-                  <p className="basis-full">{monster.def}</p>
-                  <p className="basis-full">{monster.hit}</p>
-                  <p className="basis-full">{monster.matk}</p>
-                  <p className="basis-full">{monster.mdef}</p>
-                  <p className="basis-full">{monster.flee}</p>
-                  <p className={`basis-full`}>{monster.lvl}</p>
-                </div>
-              ))}
+                ))}
         </div>
       </div>
     </>
