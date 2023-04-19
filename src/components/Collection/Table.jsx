@@ -78,7 +78,7 @@ const Table = ({ collections }) => {
             <h2 className={`w-[50%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <button onClick={() => handleSort("slot")} className="flex flex-row items-center gap-1">
                 SLOT
-                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
               </button>
               <select
                 name="slot"

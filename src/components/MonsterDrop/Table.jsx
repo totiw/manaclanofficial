@@ -85,6 +85,20 @@ const Table = ({ monsterDrop }) => {
                 className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
+            {/* LEVEL */}
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
+              <button onClick={() => handleSort("lvl")} className="flex flex-row items-center gap-1">
+                LEVEL
+                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
+              </button>
+              <input
+                type="text"
+                name="lvl"
+                id="lvl"
+                onChange={handleFilterNum}
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+              />
+            </h2>
             {/* BASE */}
             <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <span>BASE</span>
@@ -115,20 +129,6 @@ const Table = ({ monsterDrop }) => {
                 name="location"
                 id="location"
                 onChange={handleFilterString}
-                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
-              />
-            </h2>
-            {/* LEVEL */}
-            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
-              <button onClick={() => handleSort("lvl")} className="flex flex-row items-center gap-1">
-                LEVEL
-                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
-              </button>
-              <input
-                type="text"
-                name="lvl"
-                id="lvl"
-                onChange={handleFilterNum}
                 className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
@@ -182,6 +182,9 @@ const Table = ({ monsterDrop }) => {
                         {monster.name}
                       </p>
                       <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
+                        {monster.lvl}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
                         {monster.base}
                       </p>
                       <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
@@ -190,9 +193,7 @@ const Table = ({ monsterDrop }) => {
                       <p className="w-[150%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
                         {monster.location}
                       </p>
-                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
-                        {monster.lvl}
-                      </p>
+
                       <div
                         className={`w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40`}
                       >
@@ -224,7 +225,7 @@ const Table = ({ monsterDrop }) => {
                   .map((monster, index) => (
                     <div
                       key={index}
-                      className={`relative overflow-hidden w-[1080px] lg:w-full ${
+                      className={`relative overflow-hidden w-[1920px] lg:w-full ${
                         index % 2 != 0 ? "bg-[#ffffff]" : "bg-[#dcdcdc]"
                       } flex flex-row items-center text-[#151540] text-center text-xs lg:text-[10px] 2xl:text-xs font-bold tracking-[1px] ${
                         monsterDrop.length == index + 1 ? "border-white border-b-2" : ""
@@ -258,6 +259,9 @@ const Table = ({ monsterDrop }) => {
                         {monster.name}
                       </p>
                       <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
+                        {monster.lvl}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
                         {monster.base}
                       </p>
                       <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
@@ -266,9 +270,7 @@ const Table = ({ monsterDrop }) => {
                       <p className="w-[150%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
                         {monster.location}
                       </p>
-                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40">
-                        {monster.lvl}
-                      </p>
+
                       <div
                         className={`w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py-2 lg:px-2 2xl:px-3 h-40 lg:h-40`}
                       >

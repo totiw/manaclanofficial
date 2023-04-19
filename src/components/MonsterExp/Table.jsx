@@ -80,6 +80,20 @@ const Table = ({ monsterExp }) => {
                 className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
+            {/* LEVEL */}
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
+              <button onClick={() => handleSort("lvl")} className="flex flex-row items-center gap-1">
+                LEVEL
+                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
+              </button>
+              <input
+                type="text"
+                name="lvl"
+                id="lvl"
+                onChange={handleFilterNum}
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+              />
+            </h2>
             {/* EXP BASE */}
             <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <span>EXP BASE</span>
@@ -113,20 +127,6 @@ const Table = ({ monsterExp }) => {
                 className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2> */}
-            {/* LEVEL */}
-            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
-              <button onClick={() => handleSort("lvl")} className="flex flex-row items-center gap-1">
-                LEVEL
-                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
-              </button>
-              <input
-                type="text"
-                name="lvl"
-                id="lvl"
-                onChange={handleFilterNum}
-                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
-              />
-            </h2>
           </div>
           <div className="h-[500px] w-[1920px] lg:w-full overflow-auto scrollbar-hide">
             {sortedData == null
@@ -169,6 +169,9 @@ const Table = ({ monsterExp }) => {
                         {monster.name}
                       </p>
                       <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.lvl}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
                         {monster.exp_base}
                       </p>
                       <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
@@ -177,9 +180,6 @@ const Table = ({ monsterExp }) => {
                       {/* <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
                       {monster.type}
                     </p> */}
-                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
-                        {monster.lvl}
-                      </p>
                     </div>
                   ))
               : sortedData
@@ -204,7 +204,7 @@ const Table = ({ monsterExp }) => {
                         {index + 1}
                       </p>
                       <div
-                        className={`w-[60%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
+                        className={`w-[40%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
                       >
                         <span className="w-[60%]">
                           <LazyLoadImage
@@ -221,17 +221,17 @@ const Table = ({ monsterExp }) => {
                         {monster.name}
                       </p>
                       <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.lvl}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
                         {monster.exp_base}
                       </p>
                       <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
                         {monster.exp_job}
                       </p>
-                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
-                        {monster.type}
-                      </p>
-                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
-                        {monster.lvl}
-                      </p>
+                      {/* <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                  {monster.type}
+                </p> */}
                     </div>
                   ))}
           </div>
