@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 const Layout = lazy(() => import("./components/Layout/Layout"));
 const Home = lazy(() => import("./pages/Home"));
 const Monster = lazy(() => import("./pages/Monster/"));
@@ -8,8 +8,10 @@ const MonsterDrop = lazy(() => import("./pages/MonsterDrop/"));
 const Awaken = lazy(() => import("./pages/Awaken/"));
 const Collection = lazy(() => import("./pages/Collection/"));
 const Equip = lazy(() => import("./pages/Equip/"));
+import { ErrorBoundary } from "react-error-boundary";
 
 function App() {
+  const navigate = useNavigate();
   return (
     <Routes>
       <Route
@@ -31,9 +33,11 @@ function App() {
         <Route
           path="/monster-list"
           element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Monster />
-            </Suspense>
+            <ErrorBoundary fallback={<p>Loading</p>} onReset={() => navigate("/")}>
+              <Suspense fallback={<p>Loading</p>}>
+                <Monster />
+              </Suspense>
+            </ErrorBoundary>
           }
         />
         <Route
