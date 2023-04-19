@@ -58,7 +58,7 @@ const Tabel = ({ monsters }) => {
   // });
   return (
     <>
-      <div className="w-full lg:w-[80%] flex flex-col items-center lg:items-start">
+      <div className="w-full lg:w-[90%] flex flex-col items-center lg:items-start">
         <span
           onClick={() => navigate(-1)}
           className="hidden w-8 lg:flex flex-row rotate-180 mb-5 lg:-translate-x-10 cursor-pointer"
@@ -71,36 +71,36 @@ const Tabel = ({ monsters }) => {
         <span className="w-[20%] lg:w-[15%] h-1 lg:h-2 bg-[#EA0A8C] flex flex-row mt-5"></span>
         <p className="text-white mt-3">Total {sortedData == null ? monsters.length : sortedData.length} Items</p>
       </div>
-      <div className="select-none relative overflow-auto z-20 w-full lg:w-[80%] lg:min-h-[100%] flex flex-col gap-5">
+      <div className="select-none relative overflow-auto z-20 w-full lg:w-[90%] lg:min-h-[100%] flex flex-col gap-5">
         <div className="flex flex-col relative z-10">
-          <div className="w-[1080px] lg:w-full bg-gradient-to-r from-[#6BCBDD] to-[#63469B] background-animate flex flex-row text-center text-white text-sm lg:text-base font-bold tracking-[1px] rounded-t-lg py-5">
-            <h2 className={`basis-full`}>#</h2>
-            <h2 className={`basis-full`}>Monster</h2>
+          <div className="w-[1920px] lg:w-full bg-gradient-to-r from-[#6BCBDD] to-[#63469B] background-animate flex flex-row text-center text-white text-sm lg:text-[10px] 2xl:text-base font-bold tracking-[1px]">
+            <h2 className={`w-[40%] border border-white py-5 px-2 lg:px-2 2xl:px-3`}>#</h2>
+            <h2 className={`w-[80%] border border-white py-5 px-2 lg:px-2 2xl:px-3`}>IMAGE</h2>
             {/* Name */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[200%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <button onClick={() => handleSort("name")} className="flex flex-row items-center gap-1">
-                Name
-                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+                NAME
+                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
               </button>
               <input
                 type="text"
                 name="name"
                 id="name"
                 onChange={handleFilterString}
-                className="w-[85%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* TYPE */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <button onClick={() => handleSort("type")} className="flex flex-row items-center gap-1">
-                Type
-                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+                TYPE
+                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
               </button>
               <select
                 name="type"
                 id="type"
                 onChange={handleFilterString}
-                className="w-[85%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold"
               >
                 <option value=""></option>
                 <option value="undead" className="capitalize">
@@ -133,16 +133,16 @@ const Tabel = ({ monsters }) => {
               </select>
             </h2>
             {/* ELEMENT */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <button onClick={() => handleSort("element")} className="flex flex-row items-center gap-1">
                 ELEMENT
-                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
               </button>
               <select
                 name="element"
                 id="element"
                 onChange={handleFilterString}
-                className="w-[85%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold"
               >
                 <option value=""></option>
                 <option value="dark" className="capitalize">
@@ -181,16 +181,16 @@ const Tabel = ({ monsters }) => {
               </select>
             </h2>
             {/* SIZE */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <button onClick={() => handleSort("size")} className="flex flex-row items-center gap-1">
                 SIZE
-                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
               </button>
               <select
                 name="size"
                 id="size"
                 onChange={handleFilterString}
-                className="w-[85%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold"
               >
                 <option value=""></option>
                 <option value="small" className="capitalize">
@@ -205,177 +205,251 @@ const Tabel = ({ monsters }) => {
               </select>
             </h2>
             {/* HP */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <span>HP</span>
               <input
                 type="text"
                 name="hp"
                 id="hp"
                 onChange={handleFilterString}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* ATK */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <span>ATK</span>
               <input
                 type="text"
                 name="atk"
                 id="atk"
                 onChange={handleFilterNum}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* DEF */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <span>DEF</span>
               <input
                 type="text"
                 name="def"
                 id="def"
                 onChange={handleFilterNum}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* HIT */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <span>HIT</span>
               <input
                 type="text"
                 name="hit"
                 id="hit"
                 onChange={handleFilterNum}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* M-ATK */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <span>M-ATK</span>
               <input
                 type="text"
                 name="matk"
                 id="matk"
                 onChange={handleFilterNum}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* M-DEF */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <span>M-DEF</span>
               <input
                 type="text"
                 name="mdef"
                 id="mdef"
                 onChange={handleFilterNum}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* Flee */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
-              <span>Flee</span>
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
+              <span>FLEE</span>
               <input
                 type="text"
                 name="flee"
                 id="flee"
                 onChange={handleFilterNum}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
-            {/* LVL */}
-            <h2 className={`basis-full flex flex-col items-center gap-3`}>
+            {/* LEVEL */}
+            <h2 className={`w-[100%] border border-white py-5 px-2 lg:px-2 2xl:px-3 flex flex-col items-center gap-3`}>
               <button onClick={() => handleSort("lvl")} className="flex flex-row items-center gap-1">
-                LVL
-                <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" />
+                LEVEL
+                {/* <img src={SortIcon} alt="sort icon" className="w-4 opacity-80" /> */}
               </button>
               <input
                 type="text"
                 name="lvl"
                 id="lvl"
                 onChange={handleFilterNum}
-                className="w-[70%] h-8 lg:h-10 focus:ring-0 focus:outline-none rounded-lg px-4 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
+                className="w-full h-8 lg:h-6 2xl:h-10 focus:ring-0 focus:outline-none rounded-sm px-4 lg:px-2 text-[#0E101D] font-semibold placeholder:font-semibold lg:placeholder:tracking-[1px] placeholder:tracking-tighter"
               />
             </h2>
             {/* <h2 className={`${breakPoint == "desktop" ? "basis-[14.2857143%]" : "basis-1/3"}`}>Info</h2> */}
           </div>
-          {sortedData == null
-            ? monsters
-                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
-                .map((monster, index) => (
-                  <div
-                    key={index}
-                    className={`relative overflow-hidden w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                      monsters.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                    }`}
-                  >
-                    <img
-                      src={ManaWM}
-                      alt="mana watermark"
-                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
-                    />
-                    <p className={`basis-full`}>{index + 1}</p>
-                    <div className={`basis-full flex flex-row justify-center`}>
-                      <span className="w-[60%]">
-                        <LazyLoadImage
-                          effect="blur"
-                          src={monster.image}
-                          alt={monster.name}
-                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                        />
-                      </span>
+          <div className="h-[500px] w-[1920px] lg:w-full overflow-auto scrollbar-hide">
+            {sortedData == null
+              ? monsters
+                  .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                  .map((monster, index) => (
+                    <div
+                      key={index}
+                      className={`relative overflow-hidden w-[1920px] lg:w-full ${
+                        index % 2 != 0 ? "bg-[#ffffff]" : "bg-[#dcdcdc]"
+                      } flex flex-row items-center text-[#151540] text-center text-xs lg:text-[10px] 2xl:text-xs font-bold tracking-[1px] ${
+                        monsters.length == index + 1 ? "border-white border-b-2" : ""
+                      }`}
+                    >
+                      <img
+                        src={ManaWM}
+                        alt="mana watermark"
+                        className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                      />
+                      <p
+                        className={`w-[40%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
+                      >
+                        {index + 1}
+                      </p>
+                      <div
+                        className={`w-[80%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
+                      >
+                        <span className="w-[80%]">
+                          <LazyLoadImage
+                            effect="blur"
+                            src={monster.image}
+                            alt={monster.name}
+                            placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                          />
+                        </span>
+                      </div>
+                      <p
+                        className={`w-[200%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
+                      >
+                        {monster.name}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.type}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.element}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.size}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.hp}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.atk}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.def}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.hit}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.matk}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.mdef}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.flee}
+                      </p>
+                      <p
+                        className={`w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
+                      >
+                        {monster.lvl}
+                      </p>
                     </div>
-                    <p className={`basis-full`}>{monster.name}</p>
-                    <p className="basis-full">{monster.type}</p>
-                    <p className="basis-full">{monster.element}</p>
-                    <p className="basis-full">{monster.size}</p>
-                    <p className="basis-full">{monster.hp}</p>
-                    <p className="basis-full">{monster.atk}</p>
-                    <p className="basis-full">{monster.def}</p>
-                    <p className="basis-full">{monster.hit}</p>
-                    <p className="basis-full">{monster.matk}</p>
-                    <p className="basis-full">{monster.mdef}</p>
-                    <p className="basis-full">{monster.flee}</p>
-                    <p className={`basis-full`}>{monster.lvl}</p>
-                  </div>
-                ))
-            : sortedData
-                .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
-                .map((monster, index) => (
-                  <div
-                    key={index}
-                    className={`relative overflow-hidden w-[1080px] lg:w-full bg-[#0E101D] flex flex-row items-center text-white text-center text-xs lg:text-base font-bold tracking-[1px] py-4 lg:py-3 ${
-                      sortedData.length == index + 1 ? "border-none rounded-b-lg" : "border-white border-b-2"
-                    }`}
-                  >
-                    <img
-                      src={ManaWM}
-                      alt="mana watermark"
-                      className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
-                    />
-                    <p className={`basis-full`}>{index + 1}</p>
-                    <div className={`basis-full flex flex-row justify-center`}>
-                      <span className="w-[60%]">
-                        <LazyLoadImage
-                          effect="blur"
-                          src={monster.image}
-                          alt={monster.name}
-                          placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
-                        />
-                      </span>
+                  ))
+              : sortedData
+                  .sort((a, b) => (a[sortBy] > b[sortBy] ? sortDir : sortDir * -1))
+                  .map((monster, index) => (
+                    <div
+                      key={index}
+                      className={`relative overflow-hidden w-[1920px] lg:w-full ${
+                        index % 2 != 0 ? "bg-[#ffffff]" : "bg-[#dcdcdc]"
+                      } flex flex-row items-center text-[#151540] text-center text-xs lg:text-[10px] 2xl:text-xs font-bold tracking-[1px] ${
+                        monsters.length == index + 1 ? "border-white border-b-2" : ""
+                      }`}
+                    >
+                      <img
+                        src={ManaWM}
+                        alt="mana watermark"
+                        className="absolute w-full bg-blend-overlay opacity-10 -translate-y-8"
+                      />
+                      <p
+                        className={`w-[40%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
+                      >
+                        {index + 1}
+                      </p>
+                      <div
+                        className={`w-[80%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
+                      >
+                        <span className="w-[80%]">
+                          <LazyLoadImage
+                            effect="blur"
+                            src={monster.image}
+                            alt={monster.name}
+                            placeholderSrc={`/src/assets/Identity/mana-logo.webp`}
+                          />
+                        </span>
+                      </div>
+                      <p
+                        className={`w-[200%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
+                      >
+                        {monster.name}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.type}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.element}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.size}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.hp}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.atk}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.def}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.hit}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.matk}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.mdef}
+                      </p>
+                      <p className="w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20">
+                        {monster.flee}
+                      </p>
+                      <p
+                        className={`w-[100%] flex flex-row justify-center items-center border-x border-y-0 border-[#b6b6b6] py-5 px-2 lg:py lg:px-2 2xl:px-3 h-20`}
+                      >
+                        {monster.lvl}
+                      </p>
                     </div>
-                    <p className={`basis-full`}>{monster.name}</p>
-                    <p className="basis-full">{monster.type}</p>
-                    <p className="basis-full">{monster.element}</p>
-                    <p className="basis-full">{monster.size}</p>
-                    <p className="basis-full">{monster.hp}</p>
-                    <p className="basis-full">{monster.atk}</p>
-                    <p className="basis-full">{monster.def}</p>
-                    <p className="basis-full">{monster.hit}</p>
-                    <p className="basis-full">{monster.matk}</p>
-                    <p className="basis-full">{monster.mdef}</p>
-                    <p className="basis-full">{monster.flee}</p>
-                    <p className={`basis-full`}>{monster.lvl}</p>
-                  </div>
-                ))}
+                  ))}
+          </div>
         </div>
       </div>
     </>

@@ -55,7 +55,7 @@ const Layout = () => {
     <>
       <span
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className={`bg-[#EA0A8C] fixed z-50 w-10 lg:w-12 h-10 lg:h-12 bottom-4 right-4 p-2 rounded drop-shadow-xl cursor-pointer duration-300 ease-out transition-all ${
+        className={`bg-[#EA0A8C] fixed z-50 w-10 2xl:w-12 h-10 2xl:h-12 bottom-4 right-4 p-2 rounded drop-shadow-xl cursor-pointer duration-300 ease-out transition-all ${
           goUp ? "opacity-100 scale-100" : "opacity-0 scale-0"
         }`}
       >
@@ -252,7 +252,7 @@ const Layout = () => {
       </nav>
       {/* Desktop Nav */}
       <div className={`${isNavOpen ? " lg:flex" : "lg:hidden"} hidden w-full px-[100px] fixed z-50`}>
-        <div className="absolute gap-3 bg-[#4F9AA8] top-20 flex flex-col text-white text-md font-semibold">
+        <div className="absolute gap-3 bg-[#4F9AA8] top-20 flex flex-col text-white text-xs 2xl:text-md font-semibold">
           <ScrollLink
             to="about"
             smooth="true"
@@ -342,11 +342,11 @@ const Layout = () => {
         <div className={`absolute z-0 w-full left-0" left-0 flex flex-row grow justify-center`}>
           {routeLocation.pathname == "/" ? (
             <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-              <img src={Brand} alt="mana-brand" width="138" />
+              <img src={Brand} alt="mana-brand" className="w-36 lg:w-24 2xl:w-36" />
             </button>
           ) : (
             <Link to="/">
-              <img src={Brand} alt="mana-brand" width="138" />
+              <img src={Brand} alt="mana-brand" className="w-36 lg:w-24 2xl:w-36" />
             </Link>
           )}
         </div>
@@ -424,11 +424,11 @@ const Layout = () => {
         <div className={`absolute z-0 w-full left-0" left-0 flex flex-row grow justify-center`}>
           {routeLocation.pathname == "/" ? (
             <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-              <img src={Brand} alt="mana-brand" width="138" />
+              <img src={Brand} alt="mana-brand" className="w-36 lg:w-24 2xl:w-36" />
             </button>
           ) : (
             <Link to="/">
-              <img src={Brand} alt="mana-brand" width="138" />
+              <img src={Brand} alt="mana-brand" className="w-36 lg:w-24 2xl:w-36" />
             </Link>
           )}
         </div>
