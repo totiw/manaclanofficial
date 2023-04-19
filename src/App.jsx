@@ -33,7 +33,7 @@ function App() {
         <Route
           path="/monster-list"
           element={
-            <ErrorBoundary fallback={<p>Loading</p>} onReset={() => navigate("/")}>
+            <ErrorBoundary FallbackComponent={<p>Loading</p>} onReset={() => navigate("/")}>
               <Suspense fallback={<p>Loading</p>}>
                 <Monster />
               </Suspense>
@@ -43,41 +43,51 @@ function App() {
         <Route
           path="/monster-exp"
           element={
-            <Suspense fallback={<p>Loading</p>}>
-              <MonsterExp />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={<p>Loading</p>} onReset={() => navigate("/")}>
+              <Suspense fallback={<p>Loading</p>}>
+                <MonsterExp />
+              </Suspense>
+            </ErrorBoundary>
           }
         />
         <Route
           path="/monster-drop"
           element={
-            <Suspense fallback={<p>Loading</p>}>
-              <MonsterDrop />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={<p>Loading</p>} onReset={() => navigate("/")}>
+              <Suspense fallback={<p>Loading</p>}>
+                <MonsterDrop />
+              </Suspense>
+            </ErrorBoundary>
           }
         />
         <Route
           path="/equip-list"
           element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Equip />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={<p>Loading</p>} onReset={() => navigate("/")}>
+              <Suspense fallback={<p>Loading</p>}>
+                <Equip />
+              </Suspense>
+            </ErrorBoundary>
           }
         />
         <Route
           path="/cardawakening"
           element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Awaken />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={<p>Loading</p>} onReset={() => navigate("/")}>
+              <Suspense fallback={<p>Loading</p>}>
+                <Awaken />
+              </Suspense>
+            </ErrorBoundary>
           }
         />
         <Route
           path="/cardcollection"
           element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Collection />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={<p>Loading</p>} onReset={() => navigate("/")}>
+              <Suspense fallback={<p>Loading</p>}>
+                <Collection />
+              </Suspense>
+            </ErrorBoundary>
           }
         />
       </Route>
