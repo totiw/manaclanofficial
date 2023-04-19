@@ -251,14 +251,18 @@ const Layout = () => {
         </div>
       </nav>
       {/* Desktop Nav */}
-      <div className={`${isNavOpen ? " lg:flex" : "lg:hidden"} hidden w-full px-[100px] fixed z-50`}>
-        <div className="absolute gap-3 bg-[#4F9AA8] top-20 flex flex-col text-white text-xs 2xl:text-md font-semibold">
+      <div
+        className={`${
+          isNavOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0"
+        } hidden md:flex w-full px-[100px] fixed z-50 duration-500 ease-out transition-all`}
+      >
+        <div className="absolute gap-3 bg-[#4F9AA8] top-20 flex flex-col text-white text-lg lg:text-xs 2xl:text-xl font-semibold">
           <ScrollLink
             to="about"
             smooth="true"
             duration={500}
             offset={offset}
-            className="select-none tracking-[1.5px] cursor-pointer px-3 py-1 hover:bg-[#6BCBDD]"
+            className="select-none tracking-[1.5px] cursor-pointer px-3 py-2 hover:bg-[#6BCBDD]"
           >
             About
           </ScrollLink>
@@ -267,7 +271,7 @@ const Layout = () => {
             smooth="true"
             duration={500}
             offset={offset}
-            className="select-none tracking-[1.5px] cursor-pointer px-3 py-1 hover:bg-[#6BCBDD]"
+            className="select-none tracking-[1.5px] cursor-pointer px-3 py-2 hover:bg-[#6BCBDD]"
           >
             Vision
           </ScrollLink>
@@ -276,14 +280,14 @@ const Layout = () => {
             smooth="true"
             duration={500}
             offset={offset}
-            className="select-none tracking-[1.5px] cursor-pointer px-3 py-1 hover:bg-[#6BCBDD]"
+            className="select-none tracking-[1.5px] cursor-pointer px-3 py-2 hover:bg-[#6BCBDD]"
           >
             Mission
           </ScrollLink>
         </div>
       </div>
       <nav
-        className={`hidden lg:z-40 lg:w-full h-[122px] top-0 lg:flex flex-row justify-between items-center px-[100px] text-white`}
+        className={`hidden lg:z-40 lg:w-full h-[90px] top-0 lg:flex flex-row justify-between items-center px-[100px] text-white`}
       >
         <div className={`gap-[58px] relative z-10 flex flex-row nav-link`}>
           {routeLocation.pathname == "/" ? (
